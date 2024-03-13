@@ -1,15 +1,22 @@
 plugins {
     id("com.android.application")
+    id("com.google.dagger.hilt.android")
+    id ("dagger.hilt.android.plugin")
 }
 
 android {
     namespace = "com.example.nbu"
-    compileSdk = 33
+    compileSdk = 34
+
+    buildFeatures {
+        viewBinding = true
+        dataBinding = true
+    }
 
     defaultConfig {
         applicationId = "com.example.nbu"
         minSdk = 30
-        targetSdk = 33
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
 
@@ -36,4 +43,7 @@ dependencies {
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    //hilt
+    implementation ("com.google.dagger:hilt-android:2.44")
+    annotationProcessor ("com.google.dagger:hilt-compiler:2.44")
 }
