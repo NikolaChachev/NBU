@@ -21,6 +21,8 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentFactory;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 
@@ -38,6 +40,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(getViewModelClass());
         binding = DataBindingUtil.setContentView(this, getLayoutId());
         makeStatusBarTransparent();
     }
@@ -56,7 +59,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         window.setStatusBarColor(Color.TRANSPARENT);
     }
 
-    void openActivity(Class<AbstractFragment> clazz, Bundle args) {
+    public <T extends AbstractActivity>void openActivity(Class<T> clazz, Bundle args) {
         hideKeyboard();
 
         Bundle resolvedArgs = resolveArgs(args, viewModel);
@@ -75,7 +78,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         }
     }
 
-    public void openView(Class<AbstractFragment> viewClass, Bundle args) {
+    public <T extends AbstractFragment> void openView(Class<T> viewClass, Bundle args) {
         hideKeyboard();
 
         int containerViewId = getContainerViewId();

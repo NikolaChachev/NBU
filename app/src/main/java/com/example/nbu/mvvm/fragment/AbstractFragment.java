@@ -12,8 +12,11 @@ import androidx.databinding.DataBindingUtil;
 import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.mvvm.activity.AbstractActivity;
+import com.example.nbu.mvvm.vm.EmptyViewModel;
 
 public abstract class AbstractFragment extends Fragment {
 
@@ -32,7 +35,7 @@ public abstract class AbstractFragment extends Fragment {
         }
         int layoutId = getLayoutResId();
         int bindResId = getViewModelResId();
-
+        viewModel = new ViewModelProvider(this).get(getViewModelClass());
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false);
         binding.setVariable(bindResId, viewModel);
         return binding.getRoot();
@@ -50,7 +53,7 @@ public abstract class AbstractFragment extends Fragment {
 
     //region navigation methods
 
-    void navigateToView(Class<AbstractActivity> clazz,
+    <V extends AbstractFragment> void navigateToView(Class<V> clazz,
             Bundle args) {
         FragmentActivity activity = getActivity();
         if(activity instanceof AbstractActivity){
@@ -58,17 +61,17 @@ public abstract class AbstractFragment extends Fragment {
             if(args != null){
                 args.putAll(navArgs);
             }
-//            activity.openView(clazz, args);
+            ((AbstractActivity)activity).openView(clazz, args);
         }
     }
 
-     public void navigateToActivity(
-            Class<AbstractActivity> clazz,
+     public <T extends AbstractActivity>void navigateToActivity(
+            Class<T> clazz,
             Bundle args
     ) {
          FragmentActivity activity = getActivity();
         if(activity instanceof AbstractActivity){
-//            it.openActivity(clazz, args);
+            ((AbstractActivity)activity).openActivity(clazz, args);
         }
     }
 
@@ -78,11 +81,11 @@ public abstract class AbstractFragment extends Fragment {
         }
     }
 
-    abstract int getViewModelResId();
+    protected abstract int getViewModelResId();
 
-    abstract int getLayoutResId();
+    protected abstract int getLayoutResId();
 
-    abstract Class<AbstractViewModel> getViewModelClass();
+    protected abstract <T extends AbstractViewModel>Class<T> getViewModelClass();
 
     //endregion
 
