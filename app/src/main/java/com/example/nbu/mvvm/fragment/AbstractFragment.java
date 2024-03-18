@@ -18,11 +18,12 @@ import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.mvvm.activity.AbstractActivity;
 import com.example.nbu.mvvm.vm.EmptyViewModel;
 
-public abstract class AbstractFragment extends Fragment {
+public abstract class AbstractFragment<B extends ViewDataBinding, VM extends AbstractViewModel> extends Fragment {
 
-    protected ViewDataBinding binding;
 
-    protected AbstractViewModel viewModel;
+    protected B binding;
+
+    protected VM viewModel;
 
     //region base lifecycle methods
 
