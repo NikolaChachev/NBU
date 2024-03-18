@@ -1,10 +1,13 @@
 package com.example.nbu;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.mvvm.activity.AbstractActivity;
-import com.example.nbu.mvvm.vm.EmptyViewModel;
+import com.example.nbu.service.pojos.Item;
+import com.example.nbu.service.pojos.Weapon;
+
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -14,6 +17,9 @@ public class MainActivity extends AbstractActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Weapon weapon = new Weapon("Axeoverthenlettersfoa", 200, 5, 10, 2);
+        Item weapon1 = new Weapon("Sword", 100, 2,4,1);
+        Log.e("test", weapon + "\n" + weapon1);
     }
 
     @Override
