@@ -19,14 +19,10 @@ import dagger.hilt.android.AndroidEntryPoint;
 @AndroidEntryPoint
 public class InventoryFragment extends AbstractFragment {
 
-    EmptyViewModel viewModel;
-
-
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.e("test", "inventory fragment called");
-        viewModel = new ViewModelProvider(this).get(EmptyViewModel.class);
     }
 
     @Override
