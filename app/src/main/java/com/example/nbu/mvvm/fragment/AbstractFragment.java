@@ -54,7 +54,7 @@ public abstract class AbstractFragment<B extends ViewDataBinding, VM extends Abs
 
     //region navigation methods
 
-    <V extends AbstractFragment> void navigateToView(Class<V> clazz,
+    <T extends AbstractFragment<?,?>> void navigateToView(Class<T> clazz,
             Bundle args) {
         FragmentActivity activity = getActivity();
         if(activity instanceof AbstractActivity){
@@ -66,7 +66,7 @@ public abstract class AbstractFragment<B extends ViewDataBinding, VM extends Abs
         }
     }
 
-     public <T extends AbstractActivity>void navigateToActivity(
+     public <T extends AbstractActivity<?,?>>void navigateToActivity(
             Class<T> clazz,
             Bundle args
     ) {
@@ -86,7 +86,7 @@ public abstract class AbstractFragment<B extends ViewDataBinding, VM extends Abs
 
     protected abstract int getLayoutResId();
 
-    protected abstract <T extends AbstractViewModel>Class<T> getViewModelClass();
+    protected abstract Class<VM> getViewModelClass();
 
     //endregion
 

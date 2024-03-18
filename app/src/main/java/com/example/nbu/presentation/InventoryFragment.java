@@ -6,23 +6,24 @@ import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.lifecycle.ViewModelProvider;
 
 import com.example.nbu.BR;
 import com.example.nbu.R;
-import com.example.nbu.mvvm.AbstractViewModel;
+import com.example.nbu.databinding.FragmentInventoryBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.mvvm.vm.EmptyViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
-public class InventoryFragment extends AbstractFragment {
+public class InventoryFragment extends AbstractFragment<FragmentInventoryBinding,
+        EmptyViewModel> {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.e("test", "inventory fragment called");
+
     }
 
     @Override
@@ -35,9 +36,14 @@ public class InventoryFragment extends AbstractFragment {
         return R.layout.fragment_inventory;
     }
 
-    @SuppressWarnings("unchecked")
     @Override
-    protected <T extends AbstractViewModel>Class<T> getViewModelClass() {
-        return (Class<T>) EmptyViewModel.class;
+    protected Class<EmptyViewModel> getViewModelClass() {
+        return EmptyViewModel.class;
     }
+
+
+//    @Override
+//    protected <VM extends AbstractViewModel>Class<VM> getViewModelClass() {
+//        return (Class<T>) EmptyViewModel.class;
+//    }
 }
