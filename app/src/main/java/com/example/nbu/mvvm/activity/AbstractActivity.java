@@ -42,7 +42,7 @@ public abstract class AbstractActivity<B extends ViewDataBinding, VM extends Abs
         super.onCreate(savedInstanceState);
         viewModel = new ViewModelProvider(this).get(getViewModelClass());
         binding = DataBindingUtil.setContentView(this, getLayoutId());
-        makeStatusBarTransparent();
+//        makeStatusBarTransparent();
     }
 
     protected abstract int getLayoutId();
