@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="EmptyVM"
+            type="com.example.nbu.mvvm.vm.EmptyViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/inventory_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:text="Equipment"
+            android:textSize="26sp"
+            />
+
+        <TextView
+            android:id="@+id/inventory_weapon"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inventory_title"
+            app:layout_constraintEnd_toStartOf="@id/inventory_head_item"
+            tools:text="Weapon: Great Axe"
+            />
+        <TextView
+            android:id="@+id/inventory_head_item"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/inventory_weapon"
+            app:layout_constraintTop_toBottomOf="@id/inventory_title"
+            tools:text="Helmet: Horned helm"
+            />
+
+        <TextView
+            android:id="@+id/inventory_chest_item"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inventory_weapon"
+            app:layout_constraintEnd_toStartOf="@id/inventory_arms"
+            tools:text="Chest armor: Full plate"
+            />
+
+        <TextView
+            android:id="@+id/inventory_arms"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/inventory_chest_item"
+            app:layout_constraintTop_toTopOf="@id/inventory_chest_item"
+            tools:text="Arms: Silver arm plate"
+            />
+
+        <TextView
+            android:id="@+id/inventory_legs"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inventory_chest_item"
+            app:layout_constraintEnd_toStartOf="@id/inventory_feet"
+            tools:text="Legs: Silver leggings"
+            />
+        <TextView
+            android:id="@+id/inventory_feet"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/inventory_legs"
+            app:layout_constraintTop_toTopOf="@id/inventory_legs"
+            tools:text="Feet: Silver boots"
+            />
+
+        <TextView
+            android:id="@+id/inventory_subtitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/inventory_legs"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="Inventory"
+            android:textSize="26sp"
+            android:gravity="center"
+            />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/inventory_recycle_view"
+            android:layout_marginTop="16dp"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inventory_subtitle"
+            app:layout_constraintBottom_toBottomOf="parent"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

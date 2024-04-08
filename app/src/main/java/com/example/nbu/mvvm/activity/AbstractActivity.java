@@ -21,30 +21,33 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentFactory;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 
 
-public abstract class AbstractActivity extends AppCompatActivity {
+public abstract class AbstractActivity<B extends ViewDataBinding, VM extends AbstractViewModel> extends AppCompatActivity {
 
     private int numOfBackPressed = 0;
 
-    private AbstractFragment currentView;
+    private AbstractFragment<?,?> currentView;
 
-    protected ViewDataBinding binding;
+    protected B binding;
 
-    protected AbstractViewModel viewModel;
+    protected VM viewModel;
 
     @Override
     protected void onCreate(@Nullable final Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        viewModel = new ViewModelProvider(this).get(getViewModelClass());
         binding = DataBindingUtil.setContentView(this, getLayoutId());
-        makeStatusBarTransparent();
+//        makeStatusBarTransparent();
     }
 
     protected abstract int getLayoutId();
 
-    protected abstract Class<AbstractViewModel> getViewModelClass();
+    protected abstract Class<VM> getViewModelClass();
 
     protected abstract int getContainerViewId();
 
@@ -56,7 +59,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         window.setStatusBarColor(Color.TRANSPARENT);
     }
 
-    void openActivity(Class<AbstractFragment> clazz, Bundle args) {
+    public <T extends AbstractActivity<?,?>>void openActivity(Class<T> clazz, Bundle args) {
         hideKeyboard();
 
         Bundle resolvedArgs = resolveArgs(args, viewModel);
@@ -75,7 +78,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         }
     }
 
-    public void openView(Class<AbstractFragment> viewClass, Bundle args) {
+    public <T extends AbstractFragment<?,?>> void openView(Class<T> viewClass, Bundle args) {
         hideKeyboard();
 
         int containerViewId = getContainerViewId();
@@ -96,7 +99,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
 //                fm.popBackStack()
 //            }
             Fragment existing = fm.findFragmentByTag(viewName);
-            AbstractFragment newView;
+            AbstractFragment<?,?> newView;
             if (existing != null) {
                 newView = popBackStackTo(fm, viewName, args);
             } else {
@@ -106,8 +109,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         }
     }
 
-
-    private AbstractFragment attachNewView(
+    private AbstractFragment<?,?> attachNewView(
             FragmentManager fragmentManager,
             int containerId,
             String viewClassName,
@@ -125,7 +127,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         ftx.commit();
         fragmentManager.executePendingTransactions();
 
-        return (AbstractFragment) newFragment;
+        return (AbstractFragment<?,?>) newFragment;
     }
 
 
@@ -152,7 +154,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
         }
     }
 
-    private AbstractFragment popBackStackTo(
+    private AbstractFragment<ViewDataBinding, AbstractViewModel> popBackStackTo(
             FragmentManager fragmentManager,
             String viewClassName,
             Bundle args) {
@@ -170,7 +172,7 @@ public abstract class AbstractActivity extends AppCompatActivity {
 
         fragmentManager.popBackStack(viewClassName, 0);
         fragmentManager.executePendingTransactions();
-        return (AbstractFragment) view;
+        return (AbstractFragment<ViewDataBinding, AbstractViewModel>) view;
     }
 
 

@@ -1,9 +1,11 @@
 package com.example.nbu.service.pojos;
 
+import androidx.annotation.NonNull;
+
 public class Weapon extends Item {
-    private int StrRequirement;
-    private double bonusDamage;
-    private int rating;
+    private final int StrRequirement;
+    private final double bonusDamage;
+    private final int rating;
 
     public Weapon(String name, int value, int strRequirement, double bonusDamage, int rating) {
         super(name, value);
@@ -24,20 +26,20 @@ public class Weapon extends Item {
         return rating;
     }
 
+    @NonNull
     @Override
     public String toString() {
-        StringBuilder sb = new StringBuilder();
 
-        sb.append(String.format("%-10s", super.getName()))
-                .append(String.format("%-14s", " | value: " + super.getValue()))
-                .append(String.format("%-28s"," | Strength requirement: " + StrRequirement))
-                .append(String.format("%-22s", " | Bonus damage: " + bonusDamage))
-                .append(" | rating: ")
-                .append(rating);
-//        String data = sb.toString() + "| value: " + super.getValue() +
+        //        String data = sb.toString() + "| value: " + super.getValue() +
 //                " |Strength requirement: " + StrRequirement +
 //                " |Bonus damage: " + bonusDamage +
 //                " |rating: " + rating;
-        return sb.toString();
+        //todo update to somethign ebetter
+        return String.format("%-10s", super.getName()) +
+                String.format("%-14s", " | value: " + super.getValue()) +
+                String.format("%-28s", " | Strength requirement: " + StrRequirement) +
+                String.format("%-22s", " | Bonus damage: " + bonusDamage) +
+                " | rating: " +
+                rating;
     }
 }
