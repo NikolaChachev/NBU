@@ -1,9 +1,13 @@
 package com.example.nbu.presentation.inventory;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +21,8 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
     private static final String TAG = "CustomAdapter";
 
     private List<Item> mDataSet;
+
+    private Context context;
 
     // BEGIN_INCLUDE(recyclerViewSampleViewHolder)
     /**
@@ -32,6 +38,13 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
                 @Override
                 public void onClick(View v) {
                     Log.d(TAG, "Element " + getAdapterPosition() + " clicked.");
+                    PopupMenu popup = new PopupMenu(v.getContext(), v);
+                    popup.inflate(R.menu.inventory_item_menu);
+                    popup.show();
+                    Menu menu = popup.getMenu();
+                    MenuItem item = menu.getItem(0);
+                    item.setEnabled(false);
+
                 }
             });
             textView = (TextView) v.findViewById(R.id.item_title);
@@ -48,8 +61,9 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
      *
      * @param dataSet String[] containing the data to populate views to be used by RecyclerView.
      */
-    public CustomAdapter(List<Item> dataSet) {
+    public CustomAdapter(List<Item> dataSet, Context context) {
         mDataSet = dataSet;
+        this.context = context;
     }
 
     // BEGIN_INCLUDE(recyclerViewOnCreateViewHolder)
@@ -59,7 +73,6 @@ public class CustomAdapter extends RecyclerView.Adapter<CustomAdapter.ViewHolder
         // Create a new view.
         View v = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.layout_inventory_item, viewGroup, false);
-
         return new ViewHolder(v);
     }
     // END_INCLUDE(recyclerViewOnCreateViewHolder)

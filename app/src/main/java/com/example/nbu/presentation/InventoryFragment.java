@@ -2,6 +2,7 @@ package com.example.nbu.presentation;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.PopupMenu;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -23,14 +24,24 @@ public class InventoryFragment extends AbstractFragment<FragmentInventoryBinding
         EmptyViewModel> {
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState ) {
         super.onViewCreated(view, savedInstanceState);
 
         Inventory inventory = Inventory.getInstance();
-        CustomAdapter adapter = new CustomAdapter(inventory.getItems());
+        CustomAdapter adapter = new CustomAdapter(inventory.getItems(), getContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         binding.inventoryRecycleView.setAdapter(adapter);
         binding.inventoryRecycleView.setLayoutManager(layoutManager);
+        setupEquipmentTexts();
+        binding.inventoryChestItem.setOnClickListener(item -> {
+            //todo maybe create long toasts instead ?
+            createShortToast(inventory.getHeadPiece().toString());
+        });
+    }
+
+    private void setupEquipmentTexts(){
+        Inventory inventory = Inventory.getInstance();
+        binding.inventoryChestItem.setText(inventory.getHeadPiece().getName());
     }
 
     @Override
