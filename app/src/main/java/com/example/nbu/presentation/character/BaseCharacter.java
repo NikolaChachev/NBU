@@ -10,11 +10,11 @@ public abstract class BaseCharacter {
     private int speed;
     private int strength;
     private int agility;
-    private double baseDamage;
+    protected double baseDamage;
 
-    public BaseCharacter(String name, int level, Double maxHealth, int armor, int speed, int strength, int agility, double baseDamage) {
+    public BaseCharacter(String name, int level, double maxHealth, int armor, int speed, int strength, int agility, double baseDamage) {
         if (name == null || name.isEmpty() || level < 1 || maxHealth < 1 || armor < 0 || strength < 0 || agility < 0
-                || baseDamage < 0 || speed < 0){
+                || baseDamage < 0 || speed < 0) {
             throw new IllegalArgumentException("bad data parsed to constructor");
         }
         this.name = name;
@@ -40,6 +40,33 @@ public abstract class BaseCharacter {
 
     public int getSpeed() {
         return speed;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getArmor() {
+        return armor;
+    }
+
+    public int getStrength() {
+        return strength;
+    }
+
+    public int getAgility() {
+        return agility;
+    }
+
+
+    public abstract double getDamage();
+
+    public void takeDamage(double damage) {
+        this.currentHealth = this.currentHealth - damage < 0 ? 0 : this.currentHealth - damage;
+    }
+
+    public boolean isDead() {
+        return this.currentHealth < 1;
     }
 
     @Override

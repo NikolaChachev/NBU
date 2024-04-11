@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">NBU</string>
+    <string name="fragment_combat_next_round_button_text">Next Round</string>
+    <string name="fragment_combat_skip_battle_button_text">Skip Battle</string>
 </resources>
