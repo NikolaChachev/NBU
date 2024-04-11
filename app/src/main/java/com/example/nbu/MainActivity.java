@@ -16,8 +16,8 @@ public class MainActivity extends AbstractActivity<ActivityMainBinding, EmptyVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
         Adventurer.initializeAdventurer("Bobcho");
+        binding.mainCharacterName.setText(Adventurer.getInstance().getName());
         openView(CombatFragment.class, null);
     }
 
