@@ -58,6 +58,13 @@ public abstract class BaseCharacter {
         return agility;
     }
 
+    public double getMaxHealth() {
+        return maxHealth;
+    }
+
+    public void heal(){
+        this.currentHealth = this.maxHealth;
+    }
 
     public abstract double getDamage();
 

@@ -1,5 +1,8 @@
 package com.example.nbu.presentation.combat;
 
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.MutableLiveData;
+
 import com.example.nbu.R;
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.presentation.character.Adventurer;
@@ -27,6 +30,14 @@ public class CombatViewModel extends AbstractViewModel {
 
     private int currentRound = 1;
 
+    private final MutableLiveData<CombatStatus> combatStatus = new MutableLiveData<>(CombatStatus.ENCOUNTER);
+
+    public final LiveData<CombatStatus> _combatStatus = combatStatus;
+
+    private final MutableLiveData<Boolean> isCombatOver = new MutableLiveData<>(false);
+
+    public final LiveData<Boolean> _isCombatOver = isCombatOver;
+
     @Inject
     public CombatViewModel(ACoroutineContextProvider provider) {
         super(provider);
@@ -36,12 +47,12 @@ public class CombatViewModel extends AbstractViewModel {
     }
 
     private void generateEnemy() {
-        enemy = new Enemy("rabbit", 1, 10.d, 0, 10, 1, 3, 5);
+        enemy = new Enemy("rabbit", 1, 20.d, 0, 100, 1, 1, 5);
         //todo this will be the logic, where we will generate an enemy we encounter
     }
 
     public String getEncounterText() {
-        return "You have encountered: " + enemy.toString();
+        return "You have encountered: " + enemy.getName();
     }
 
     public void runCombatUntilEnd() {
@@ -95,11 +106,12 @@ public class CombatViewModel extends AbstractViewModel {
                 if (enemy.isDead()) {
                     log = enemy.getName() + " is dead! ";
                     combatLogs.add(new CombatLog(log, R.color.green));
+                    combatStatus.postValue(CombatStatus.VICTORY);
 //                    int expPoints = enemy.getLevel() * 50;
-
 //                    adventurer.getExp(expPoints);
                     //adventurer.addLoot(enemy)
-                    break;
+                    isCombatOver.postValue(true);
+                    return;
                 }
                 log = enemy.getName() + " has " + enemy.getCurrentHealth() + " health left";
                 combatLogs.add(new CombatLog(log, R.color.black));
@@ -109,6 +121,11 @@ public class CombatViewModel extends AbstractViewModel {
         adventurerTimer = ACTION_TIMER_STARTING_VALUE;
         while (enemyTimer <= 0) {
             enemyTimer += ACTION_TIMER_STARTING_VALUE;
+            adventurer.takeDamage(enemy.getDamage());
+            if (adventurer.isDead()) {
+                combatStatus.postValue(CombatStatus.DEFEAT);
+                return;
+            }
         }
         ++currentRound;
     }
@@ -118,6 +135,4 @@ public class CombatViewModel extends AbstractViewModel {
         combatLogs.clear();
         return copy;
     }
-
-
 }
