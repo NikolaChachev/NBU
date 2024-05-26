@@ -2,6 +2,7 @@ package com.example.nbu.presentation.character;
 
 import com.example.nbu.service.pojos.Item;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Enemy extends BaseCharacter implements ILootable {
@@ -22,6 +23,15 @@ public class Enemy extends BaseCharacter implements ILootable {
 
     @Override
     public List<Item> getLoot() {
-        return null;
+        return generateLootBasedOnEnemy(getName(), getLevel());
+    }
+
+    public static List<Item> generateLootBasedOnEnemy(String name, int level){
+        ArrayList<Item> items =  new ArrayList<>();
+        items.add(new Item("Cloth", 10));
+        items.add(new Item("Bones", 100));
+        return items;
     }
 }
+
+

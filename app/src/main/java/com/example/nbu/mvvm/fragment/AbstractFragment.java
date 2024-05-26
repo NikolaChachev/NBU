@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -16,7 +17,6 @@ import androidx.lifecycle.ViewModelProvider;
 
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.mvvm.activity.AbstractActivity;
-import com.example.nbu.mvvm.vm.EmptyViewModel;
 
 public abstract class AbstractFragment<B extends ViewDataBinding, VM extends AbstractViewModel> extends Fragment {
 
@@ -36,8 +36,9 @@ public abstract class AbstractFragment<B extends ViewDataBinding, VM extends Abs
         }
         int layoutId = getLayoutResId();
         int bindResId = getViewModelResId();
-        viewModel = new ViewModelProvider(this).get(getViewModelClass());
+        viewModel = new ViewModelProvider(this.getActivity()).get(getViewModelClass());
         binding = DataBindingUtil.inflate(inflater, layoutId, container, false);
+        binding.setLifecycleOwner(this);
         binding.setVariable(bindResId, viewModel);
         return binding.getRoot();
     }
@@ -54,7 +55,7 @@ public abstract class AbstractFragment<B extends ViewDataBinding, VM extends Abs
 
     //region navigation methods
 
-    <T extends AbstractFragment<?,?>> void navigateToView(Class<T> clazz,
+    protected <T extends AbstractFragment<?,?>> void navigateToView(Class<T> clazz,
             Bundle args) {
         FragmentActivity activity = getActivity();
         if(activity instanceof AbstractActivity){

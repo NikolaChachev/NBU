@@ -2,4 +2,6 @@
     <string name="app_name">NBU</string>
     <string name="fragment_combat_next_round_button_text">Next Round</string>
     <string name="fragment_combat_skip_battle_button_text">Skip Battle</string>
+    <string name="encounter_dialog_continue_button">Continue</string>
+    <string name="encounter_dialog_return_to_town_button">To Town</string>
 </resources>

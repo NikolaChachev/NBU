@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="combatVM"
+            type="com.example.nbu.presentation.combat.CombatViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/encounter_enemy_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/encounter_flee_combat"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:text="@{combatVM.encounterText}"
+            android:layout_marginTop="16dp"
+            android:textSize="18sp"
+            />
+
+        <Button
+            android:id="@+id/encounter_flee_combat"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/encounter_start_combat_button"
+            android:text="Flee"
+            />
+
+        <Button
+            android:id="@+id/encounter_start_combat_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/encounter_flee_combat"
+            android:text="Fight"
+            />
+
+        <TextView
+            android:id="@+id/encounter_enemy_description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/encounter_enemy_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAlignment="center"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

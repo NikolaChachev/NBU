@@ -1,5 +1,5 @@
 package com.example.nbu.presentation.combat;
 
 public enum CombatStatus {
-    ENCOUNTER, IN_PROGRESS, VICTORY, DEFEAT
+    FAILED_FLEE, SUCCESSFUL_FLEE, ENCOUNTER, IN_PROGRESS, VICTORY, DEFEAT
 }

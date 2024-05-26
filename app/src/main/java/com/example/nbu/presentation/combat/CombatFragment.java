@@ -88,7 +88,7 @@ public class CombatFragment extends AbstractFragment<FragmentCombatBinding, Comb
 
     @Override
     protected int getViewModelResId() {
-        return BR.EmptyVM;
+        return BR.combatVM;
     }
 
     @Override
