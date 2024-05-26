@@ -8,7 +8,7 @@ import com.example.nbu.databinding.ActivityMainBinding;
 import com.example.nbu.mvvm.activity.AbstractActivity;
 import com.example.nbu.mvvm.vm.EmptyViewModel;
 import com.example.nbu.presentation.character.Adventurer;
-import com.example.nbu.presentation.combat.CombatFragment;
+import com.example.nbu.presentation.combat.encounter.EncounterFragment;
 import com.example.nbu.presentation.inventory.InventoryFragment;
 import com.example.nbu.service.data.SharedCharacterViewModel;
 
@@ -28,7 +28,7 @@ public class MainActivity extends AbstractActivity<ActivityMainBinding, EmptyVie
             openView(InventoryFragment.class, null);
         });
         sharedViewModel = new ViewModelProvider(this).get(SharedCharacterViewModel.class);
-        openView(CombatFragment.class, null);
+        openView(EncounterFragment.class, null);
         binding.mainButton.setOnClickListener(l -> {
 
         });

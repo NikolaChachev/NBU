@@ -14,7 +14,7 @@ public class Adventurer extends BaseCharacter {
     }
 
     public static void initializeAdventurer(String name) {
-        instance = new Adventurer(name, 1, 120.d, 0, 50, 1, 1, 5);
+        instance = new Adventurer(name, 1, 120.d, 0, 50, 1, 100, 5);
     }
 
     public static Adventurer getInstance() {
