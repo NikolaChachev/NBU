@@ -1,4 +1,4 @@
-package com.example.nbu.presentation.combat;
+package com.example.nbu.presentation.combat.battle;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
@@ -7,6 +7,7 @@ import com.example.nbu.R;
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.presentation.character.Enemy;
+import com.example.nbu.presentation.combat.Util;
 import com.example.nbu.service.coroutines.ACoroutineContextProvider;
 import com.example.nbu.service.pojos.Item;
 

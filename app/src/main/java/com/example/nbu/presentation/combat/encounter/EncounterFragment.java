@@ -11,8 +11,8 @@ import androidx.databinding.library.baseAdapters.BR;
 import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentEncounterBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
-import com.example.nbu.presentation.combat.CombatFragment;
-import com.example.nbu.presentation.combat.CombatViewModel;
+import com.example.nbu.presentation.combat.battle.CombatFragment;
+import com.example.nbu.presentation.combat.battle.CombatViewModel;
 
 import dagger.hilt.android.AndroidEntryPoint;
 
