@@ -7,9 +7,9 @@ public abstract class BaseCharacter {
     private double maxHealth;
     private double currentHealth;
     private int armor;
-    private int speed;
-    private int strength;
-    private int agility;
+    protected int speed;
+    protected int strength;
+    protected int agility;
     protected double baseDamage;
 
     public BaseCharacter(String name, int level, double maxHealth, int armor, int speed, int strength, int agility, double baseDamage) {
