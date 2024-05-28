@@ -1,11 +1,11 @@
 package com.example.nbu.presentation.combat;
 
 import com.example.nbu.presentation.character.Enemy;
-
 import java.util.ArrayList;
 
 public class Util {
-    public static final ArrayList<Enemy> enemies = new ArrayList<>(){
+
+    public static final ArrayList<Enemy> enemies = new ArrayList<>() {
         {
             add(new Enemy("ferral rabbit", 1, 20.d, 0, 100, 2, 5, 8));
             add(new Enemy("wolf", 2, 50.d, 0, 200, 15, 10, 10));
@@ -36,4 +36,76 @@ public class Util {
             add(new Enemy("unltralisk", 9, 2000.d, 65, 550, 2, 25, 23));
         }
     };
+
+    public static int getPointsBasedOnLevel(int level) {
+        int pointsToAdd = 2;
+        switch (level) {
+            case 1:
+            case 9:
+            case 17:
+                pointsToAdd++;
+                break;
+            case 2:
+                pointsToAdd += 3;
+                break;
+            case 3:
+            case 5:
+            case 6:
+            case 7:
+            case 10:
+            case 11:
+            case 15:
+            case 13:
+            case 14:
+                break;
+            case 4:
+            case 8:
+            case 12:
+            case 16:
+            case 19:
+                pointsToAdd += 2;
+                break;
+            case 18:
+                break;
+            default:
+                if (level % 7 == 0) {
+                    pointsToAdd += 3;
+                }
+                break;
+        }
+        return pointsToAdd;
+    }
+
+    public static int getNextLevelExpRequirements(int currentLevel) {
+        switch (currentLevel) {
+            case 1:
+            case 8:
+            case 4:
+            case 6:
+                return 1500;
+            case 2:
+            case 12:
+            case 10:
+            case 14:
+                return 2500;
+            case 3:
+            case 5:
+                return 1000;
+            case 7:
+            case 11:
+            case 9:
+                return 2000;
+            case 13:
+                return 3000;
+            case 15:
+                return 3500;
+            case 16:
+                return 4000;
+            case 17:
+            case 18:
+                return 2700;
+            default:
+                return 2250;
+        }
+    }
 }

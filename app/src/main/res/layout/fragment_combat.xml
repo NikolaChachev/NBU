@@ -50,27 +50,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="combat"
-            app:layout_constraintBottom_toTopOf="@id/combat_button_next_round"
+            app:layout_constraintBottom_toTopOf="@id/combat_left_button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/combat_button_next_round"
+            android:id="@+id/combat_left_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_combat_next_round_button_text"
+            android:text="@string/combat_left_button_progress"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@id/combat_button_skip_battle"
+            app:layout_constraintEnd_toStartOf="@id/combat_right_button"
             app:layout_constraintStart_toStartOf="parent" />
 
         <Button
-            android:id="@+id/combat_button_skip_battle"
+            android:id="@+id/combat_right_button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/fragment_combat_skip_battle_button_text"
+            android:text="@string/combat_right_button_progress"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@id/combat_button_next_round" />
+            app:layout_constraintStart_toEndOf="@id/combat_left_button" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

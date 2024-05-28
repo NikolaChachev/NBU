@@ -57,8 +57,7 @@
             layout="@layout/layout_stat_increase"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toStartOf="@id/summary_agility_layout"
             app:layout_constraintTop_toBottomOf="@id/summary_agility_layout" />
 
         <include
@@ -98,7 +97,7 @@
             android:id="@+id/summary_level_up_group"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:visibility="gone"
+            android:visibility="visible"
             app:constraint_referenced_ids="summary_level_up_text,summary_points_to_spend,summary_agility_layout,summary_speed_layout,summary_strength_layout"
             />
 

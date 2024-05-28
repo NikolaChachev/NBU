@@ -1,9 +1,15 @@
 <resources>
     <string name="app_name">NBU</string>
-    <string name="fragment_combat_next_round_button_text">Next Round</string>
-    <string name="fragment_combat_skip_battle_button_text">Skip Battle</string>
     <string name="encounter_dialog_continue_button">Continue</string>
     <string name="encounter_dialog_return_to_town_button">To Town</string>
+
+    <string name="combat_left_button_progress">Next Round</string>
+    <string name="combat_right_button_progress">Skip Battle</string>
+    <string name="combat_left_button_victory">Summary</string>
+    <string name="combat_left_button_defeat">Quit</string>
+    <string name="combat_right_button_victory">Summary</string>
+    <string name="combat_right_button_defeat">Restart</string>
+
     <string name="summary_level_up_text">Congratulations, you leveled up!</string>
     <string name="summary_go_to_town_text">Go To Town</string>
     <string name="summary_continue_exploring_text">Continue Exploring</string>
@@ -11,4 +17,5 @@
     <string name="summary_strength_increase_text">Strength</string>
     <string name="summary_speed_increase_text">Speed</string>
     <string name="summary_points_remaining_text">points to spend: %1$d</string>
+    <string name="summary_gold_and_exp_earned_text">You have earned %1$d gold and %2$d experience from this encounter.</string>
 </resources>

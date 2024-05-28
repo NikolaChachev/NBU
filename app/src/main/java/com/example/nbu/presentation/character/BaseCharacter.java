@@ -3,7 +3,7 @@ package com.example.nbu.presentation.character;
 public abstract class BaseCharacter {
     private String name;
 
-    private int level;
+    protected int level;
     private double maxHealth;
     private double currentHealth;
     private int armor;

@@ -5,7 +5,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.annotation.StringRes;
@@ -14,7 +13,6 @@ import androidx.databinding.ViewDataBinding;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 import androidx.lifecycle.ViewModelProvider;
-
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.mvvm.activity.AbstractActivity;
 
@@ -55,25 +53,25 @@ public abstract class AbstractFragment<B extends ViewDataBinding, VM extends Abs
 
     //region navigation methods
 
-    protected <T extends AbstractFragment<?,?>> void navigateToView(Class<T> clazz,
+    protected <T extends AbstractFragment<?, ?>> void navigateToView(Class<T> clazz,
             Bundle args) {
         FragmentActivity activity = getActivity();
-        if(activity instanceof AbstractActivity){
+        if (activity instanceof AbstractActivity) {
             Bundle navArgs = viewModel.postNavigationArgs();
-            if(args != null){
+            if (args != null) {
                 args.putAll(navArgs);
             }
-            ((AbstractActivity)activity).openView(clazz, args);
+            ((AbstractActivity) activity).openView(clazz, args);
         }
     }
 
-     public <T extends AbstractActivity<?,?>>void navigateToActivity(
+    public <T extends AbstractActivity<?, ?>> void navigateToActivity(
             Class<T> clazz,
             Bundle args
     ) {
-         FragmentActivity activity = getActivity();
-        if(activity instanceof AbstractActivity){
-            ((AbstractActivity)activity).openActivity(clazz, args);
+        FragmentActivity activity = getActivity();
+        if (activity instanceof AbstractActivity) {
+            ((AbstractActivity) activity).openActivity(clazz, args);
         }
     }
 

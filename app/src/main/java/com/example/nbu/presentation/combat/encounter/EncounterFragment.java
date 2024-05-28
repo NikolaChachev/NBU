@@ -3,17 +3,14 @@ package com.example.nbu.presentation.combat.encounter;
 import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.library.baseAdapters.BR;
-
 import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentEncounterBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.presentation.combat.battle.CombatFragment;
 import com.example.nbu.presentation.combat.battle.CombatViewModel;
-
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -22,6 +19,7 @@ public class EncounterFragment extends AbstractFragment<FragmentEncounterBinding
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        viewModel.refreshEnemy();
         binding.encounterFleeCombat.setOnClickListener(v -> {
             viewModel.attemptToFlee();
         });
