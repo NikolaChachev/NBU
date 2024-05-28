@@ -58,6 +58,10 @@ public class Inventory {
         this.gold += gold;
     }
 
+    public int getGold(){
+        return this.gold;
+    }
+
     public void addMany(List<Item> list) {
         if (list.size() + items.size() < 20) {
             items.addAll(list);

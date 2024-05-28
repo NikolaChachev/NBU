@@ -18,4 +18,12 @@
     <string name="summary_speed_increase_text">Speed</string>
     <string name="summary_points_remaining_text">points to spend: %1$d</string>
     <string name="summary_gold_and_exp_earned_text">You have earned %1$d gold and %2$d experience from this encounter.</string>
+    <string name="town_center_tavern_button_text">Tavern</string>
+    <string name="town_center_weapon_smith_button_text">Weapon Smith</string>
+    <string name="town_center_armor_smith_button_text">Armor Smith</string>
+    <string name="town_center_exit_town_button_text">Adventure Out</string>
+    <string name="tavern_description_text">If you wish to rest, you must pay 10 gold coins!</string>
+    <string name="tavern_rest_button_text">Rest</string>
+    <string name="tavern_see_stats_button_text">See stats</string>
+    <string name="tavern_leave_tavern_button_text">Leave Tavern</string>
 </resources>
