@@ -1,33 +1,39 @@
-package com.example.nbu.presentation.combat;
+package com.example.nbu.presentation.combat.battle;
 
+import android.os.Bundle;
+import androidx.annotation.Nullable;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.example.nbu.R;
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.presentation.character.Enemy;
+import com.example.nbu.presentation.combat.Util;
+import com.example.nbu.presentation.combat.summary.SummaryFragment;
+import com.example.nbu.presentation.inventory.Inventory;
 import com.example.nbu.service.coroutines.ACoroutineContextProvider;
 import com.example.nbu.service.pojos.Item;
-
+import dagger.hilt.android.lifecycle.HiltViewModel;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
-
 import javax.inject.Inject;
-
-import dagger.hilt.android.lifecycle.HiltViewModel;
 
 @HiltViewModel
 public class CombatViewModel extends AbstractViewModel {
+
     private static final int ACTION_TIMER_STARTING_VALUE = 100;
+
     private static final String ENCOUNTER_PREFIX = "You have encountered: ";
 
     private final Adventurer adventurer;
+
     private Enemy enemy;
 
     private final List<CombatLog> combatLogs;
+
     private int adventurerTimer = ACTION_TIMER_STARTING_VALUE;
+
     private int enemyTimer = ACTION_TIMER_STARTING_VALUE;
 
     private int currentRound = 1;
@@ -36,20 +42,28 @@ public class CombatViewModel extends AbstractViewModel {
 
     public final LiveData<CombatStatus> _combatStatus = combatStatus;
 
-    private final MutableLiveData<Boolean> isCombatOver = new MutableLiveData<>(false);
-
-    public final LiveData<Boolean> _isCombatOver = isCombatOver;
-
     private final MutableLiveData<String> _encounterText = new MutableLiveData<>();
 
     public LiveData<String> encounterText = _encounterText;
+
+    private int expReward = 0;
+
+    private int goldReward = 0;
 
     @Inject
     public CombatViewModel(ACoroutineContextProvider provider) {
         super(provider);
         adventurer = Adventurer.getInstance();
         combatLogs = new LinkedList<>();
-        generateEnemy();
+    }
+
+    @Nullable
+    @Override
+    public Bundle postNavigationArgs() {
+        Bundle bundle = new Bundle();
+        bundle.putInt(SummaryFragment.GOLD_EARNED, goldReward);
+        bundle.putInt(SummaryFragment.EXP_EARNED, expReward);
+        return bundle;
     }
 
     /**
@@ -101,8 +115,9 @@ public class CombatViewModel extends AbstractViewModel {
                 enemyIndex = rn.nextInt(6) + 21;
         }
         enemy = Util.enemies.get(enemyIndex);
+        enemy.heal();
         _encounterText.postValue(ENCOUNTER_PREFIX + enemy.getName());
-        //todo this will be the logic, where we will generate an enemy we encounter
+        combatStatus.postValue(CombatStatus.IN_PROGRESS);
     }
 
     public String getEnemyDescription() {
@@ -115,12 +130,8 @@ public class CombatViewModel extends AbstractViewModel {
         return sb.toString();
     }
 
-
-    //todo this will be the logic for generating a new enemy if the player decided to flee or after they have won
     public void refreshEnemy() {
-//        generateEnemy();
-        enemy = new Enemy("dog", 1, 20.d, 0, 100, 1, 1, 5);
-        _encounterText.postValue(ENCOUNTER_PREFIX + enemy.getName());
+        generateEnemy();
     }
 
     public void attemptToFlee() {
@@ -133,7 +144,9 @@ public class CombatViewModel extends AbstractViewModel {
 
     private boolean isFleeingSuccessful() {
         int escapeChance = (adventurer.getAgility() - enemy.getAgility()) * 2;
-        if (escapeChance <= 0) return false;
+        if (escapeChance <= 0) {
+            return false;
+        }
         Random rn = new Random();
         return rn.nextInt(101) < escapeChance;
     }
@@ -190,11 +203,12 @@ public class CombatViewModel extends AbstractViewModel {
                     log = enemy.getName() + " is dead! ";
                     combatLogs.add(new CombatLog(log, R.color.green));
                     combatStatus.postValue(CombatStatus.VICTORY);
-                    //todo implement this in next branch
-//                    int expPoints = enemy.getLevel() * 50;
-//                    adventurer.getExp(expPoints);
-                    //adventurer.addLoot(enemy)
-                    isCombatOver.postValue(true);
+                    expReward = enemy.getLevel() * 50;
+                    goldReward = enemy.getLevel() * 10;
+                    adventurer.receiveExperience(expReward);
+                    Inventory.getInstance().addGold(goldReward);
+                    //todo add a loot generator that will give random loot
+                    combatStatus.postValue(CombatStatus.VICTORY);
                     return;
                 }
                 log = enemy.getName() + " has " + enemy.getCurrentHealth() + " health left";

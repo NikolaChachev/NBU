@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="summaryVM"
+            type="com.example.nbu.presentation.combat.summary.SummaryViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/summary_rewards_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:text="come on get to the bottom this is a very long long text that i want to be at least on two lines"
+            app:layout_constraintStart_toStartOf="parent"
+            android:textAlignment="center"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/summary_level_up_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/summary_level_up_text"
+            app:layout_constraintTop_toBottomOf="@id/summary_rewards_text"
+            android:layout_marginTop="24dp"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:id="@+id/summary_points_to_spend"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/summary_level_up_text"
+            android:textAlignment="center"
+            android:textSize="12sp"
+            tools:text="points to spend: 3"
+            />
+
+        <include
+            android:id="@+id/summary_agility_layout"
+            layout="@layout/layout_stat_increase"
+            android:layout_marginTop="26dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/summary_level_up_text" />
+
+        <include
+            android:id="@+id/summary_strength_layout"
+            layout="@layout/layout_stat_increase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="@id/summary_agility_layout"
+            app:layout_constraintTop_toBottomOf="@id/summary_agility_layout" />
+
+        <include
+            android:id="@+id/summary_speed_layout"
+            layout="@layout/layout_stat_increase"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/summary_strength_layout" />
+
+        <Button
+            android:id="@+id/summary_go_to_town_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/summary_go_to_town_text"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintTop_toBottomOf="@id/summary_speed_layout"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/summary_continue_exploring_button"
+            />
+
+        <Button
+            android:id="@+id/summary_continue_exploring_button"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/summary_continue_exploring_text"
+            android:layout_marginTop="16dp"
+            android:layout_marginHorizontal="4dp"
+            app:layout_constraintTop_toBottomOf="@id/summary_speed_layout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/summary_go_to_town_button"
+            />
+
+        <androidx.constraintlayout.widget.Group
+            android:id="@+id/summary_level_up_group"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:constraint_referenced_ids="summary_level_up_text,summary_points_to_spend,summary_agility_layout,summary_speed_layout,summary_strength_layout"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

@@ -1,4 +1,4 @@
-package com.example.nbu.presentation.combat;
+package com.example.nbu.presentation.combat.battle;
 
 public class CombatLog {
 

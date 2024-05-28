@@ -1,21 +1,18 @@
-package com.example.nbu.presentation.combat;
+package com.example.nbu.presentation.combat.battle;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.nbu.BR;
 import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentCombatBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
+import com.example.nbu.presentation.combat.summary.SummaryFragment;
 import com.example.nbu.service.data.SharedCharacterViewModel;
-
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -40,7 +37,7 @@ public class CombatFragment extends AbstractFragment<FragmentCombatBinding, Comb
     }
 
     private void setupButtons() {
-        binding.combatButtonNextRound.setOnClickListener(view -> {
+        binding.combatLeftButton.setOnClickListener(view -> {
             viewModel.runNextCombatRound();
             combatAdapter.insertItems(viewModel.getLogs());
             binding.combatLogRecycleView.scrollToPosition(combatAdapter.getItemCount() - 1);
@@ -48,7 +45,7 @@ public class CombatFragment extends AbstractFragment<FragmentCombatBinding, Comb
 
         });
 
-        binding.combatButtonSkipBattle.setOnClickListener(view -> {
+        binding.combatRightButton.setOnClickListener(view -> {
             viewModel.runCombatUntilEnd();
             sharedViewModel.updateCurrentHealth();
             combatAdapter.insertItems(viewModel.getLogs());
@@ -56,30 +53,43 @@ public class CombatFragment extends AbstractFragment<FragmentCombatBinding, Comb
         });
     }
 
-    private void setupObservers(){
-        viewModel._isCombatOver.observe(this.getViewLifecycleOwner(), obs -> {
-            if(obs){
-                binding.combatButtonNextRound.setEnabled(false);
-                binding.combatButtonSkipBattle.setEnabled(false);
-            }
-        });
+    private void updateButtonsFunctionality(int rightButtonText, int leftButtonText, IButtonFunc leftButton, IButtonFunc rightButton) {
+        binding.combatLeftButton.setText(leftButtonText);
+        binding.combatLeftButton.setOnClickListener(leftButton::callFunctionality);
+        binding.combatRightButton.setText(rightButtonText);
+        binding.combatRightButton.setOnClickListener(rightButton::callFunctionality);
 
+    }
+
+    private void setupObservers() {
         viewModel._combatStatus.observe(this.getViewLifecycleOwner(), value -> {
-            switch (value){
+            switch (value) {
                 case ENCOUNTER:
-                    Log.e("test", "encounter started");
-                    //todo
-                    break;
                 case IN_PROGRESS:
-                    Log.e("test", "encounter in progress");
-                    //todo
                     break;
                 case VICTORY:
-                    Log.e("test", "Victory");
-                    //todo
+                    binding.combatLeftButton.setVisibility(View.GONE);
+                    binding.combatRightButton.setText(R.string.combat_right_button_victory);
+                    updateButtonsFunctionality(
+                            R.string.combat_right_button_victory,
+                            R.string.combat_left_button_progress,
+                            (v) -> {},
+                            (v) -> {
+                        navigateToView(SummaryFragment.class, new Bundle());
+                    });
                     break;
                 case DEFEAT:
-                    Log.e("test", "Defeat");
+                    binding.combatRightButton.setText(R.string.combat_right_button_victory);
+                    updateButtonsFunctionality(
+                            R.string.combat_right_button_defeat,
+                            R.string.combat_left_button_defeat,
+                            (v) -> {
+                                requireActivity().finishAffinity();
+                                System.exit(0);
+                            },
+                            (v) -> {
+                                //todo right button Restart functionality, this will be implemented at the end, when we have a main menu
+                            });
                     //todo
                     break;
             }

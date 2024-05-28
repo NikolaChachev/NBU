@@ -5,7 +5,7 @@
 
         <variable
             name="combatVM"
-            type="com.example.nbu.presentation.combat.CombatViewModel" />
+            type="com.example.nbu.presentation.combat.battle.CombatViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"

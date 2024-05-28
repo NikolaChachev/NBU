@@ -4,7 +4,6 @@ import com.example.nbu.service.pojos.Armor;
 import com.example.nbu.service.pojos.ArmorTypes;
 import com.example.nbu.service.pojos.Item;
 import com.example.nbu.service.pojos.Weapon;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -13,10 +12,16 @@ public class Inventory {
     List<Item> items;
 
     Item headPiece;
+
     Item chestPiece;
+
     Item armsPiece;
+
     Item feetPiece;
+
     Item legsPiece;
+
+    int gold;
 
     //region initialization
     private Inventory() {
@@ -43,23 +48,33 @@ public class Inventory {
     //endregion
 
     public void putItem(Item item) {
-        if (items.size() > 19) throw new IllegalStateException("Inventory is fill");
+        if (items.size() > 19) {
+            throw new IllegalStateException("Inventory is fill");
+        }
         items.add(item);
     }
 
+    public void addGold(int gold) {
+        this.gold += gold;
+    }
+
     public void addMany(List<Item> list) {
-        if(list.size() + items.size() < 20){
+        if (list.size() + items.size() < 20) {
             items.addAll(list);
             return;
         }
         for (Item item : list) {
-            if(items.size() > 19) return;
+            if (items.size() > 19) {
+                return;
+            }
             items.add(item);
         }
     }
 
     public Item removeItem(int index) {
-        if (index < 0 || index > items.size() - 1) throw new IndexOutOfBoundsException();
+        if (index < 0 || index > items.size() - 1) {
+            throw new IndexOutOfBoundsException();
+        }
         return items.remove(index);
     }
 
@@ -73,7 +88,7 @@ public class Inventory {
         return headPiece;
     }
 
-    public Item getChestPiece(){
+    public Item getChestPiece() {
         return chestPiece;
     }
 
@@ -89,7 +104,7 @@ public class Inventory {
         return legsPiece;
     }
 
-    public List<Item> getItems(){
+    public List<Item> getItems() {
         return items;
     }
 
