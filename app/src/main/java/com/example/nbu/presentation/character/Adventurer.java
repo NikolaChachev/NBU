@@ -1,6 +1,7 @@
 package com.example.nbu.presentation.character;
 
 import com.example.nbu.presentation.combat.Util;
+import com.example.nbu.presentation.inventory.Inventory;
 
 public class Adventurer extends BaseCharacter {
 
@@ -56,6 +57,16 @@ public class Adventurer extends BaseCharacter {
                 break;
         }
         expPointsToSpend--;
+    }
+
+    public boolean performRest(){
+        Inventory inventory = Inventory.getInstance();
+        if(inventory.getGold() < 10){
+            return false;
+        }
+        inventory.addGold(-10);
+        heal();
+        return true;
     }
 
     @Override

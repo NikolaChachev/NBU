@@ -44,7 +44,7 @@ public abstract class AbstractFragment<B extends ViewDataBinding, VM extends Abs
     //endregion
 
     protected void createShortToast(String text) {
-        Toast.makeText(getContext(), text, Toast.LENGTH_LONG).show();
+        Toast.makeText(getContext(), text, Toast.LENGTH_SHORT).show();
     }
 
     protected void createShortToast(@StringRes int stringRes) {
