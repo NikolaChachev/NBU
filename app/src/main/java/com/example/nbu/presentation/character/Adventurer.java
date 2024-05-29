@@ -2,6 +2,9 @@ package com.example.nbu.presentation.character;
 
 import com.example.nbu.presentation.combat.CombatUtil;
 import com.example.nbu.presentation.inventory.Inventory;
+import com.example.nbu.service.pojos.Armor;
+import com.example.nbu.service.pojos.Item;
+import com.example.nbu.service.pojos.Weapon;
 
 public class Adventurer extends BaseCharacter {
 
@@ -19,7 +22,7 @@ public class Adventurer extends BaseCharacter {
     }
 
     public static void initializeAdventurer(String name) {
-        instance = new Adventurer(name, 1, 12000.d, 0, 50, 1, 100, 5);
+        instance = new Adventurer(name, 1, 12000.d, 0, 50, 100, 100, 5);
     }
 
     public static Adventurer getInstance() {
@@ -57,6 +60,28 @@ public class Adventurer extends BaseCharacter {
                 break;
         }
         expPointsToSpend--;
+    }
+
+    public void applyItemBonuses(Item item){
+        if(item instanceof Weapon){
+            Weapon weapon = (Weapon) item;
+            this.baseDamage += weapon.getBonusDamage();
+        }
+        if(item instanceof Armor){
+            Armor armor = (Armor) item;
+            this.armor += armor.getArmor();
+        }
+    }
+
+    public void removeItemBonuses(Item item){
+        if(item instanceof Weapon){
+            Weapon weapon = (Weapon) item;
+            this.baseDamage -= weapon.getBonusDamage();
+        }
+        if(item instanceof Armor){
+            Armor armor = (Armor) item;
+            this.armor -= armor.getArmor();
+        }
     }
 
     public boolean performRest(){

@@ -2,8 +2,6 @@ package com.example.nbu.service.pojos;
 
 import androidx.annotation.NonNull;
 
-import java.util.Locale;
-
 public class Armor extends Item {
     private final int agiRequirement;
     private final int armor;
@@ -25,7 +23,7 @@ public class Armor extends Item {
         }
     }
 
-    int getAgiRequirement() {
+    public int getAgiRequirement() {
         return agiRequirement;
     }
 
