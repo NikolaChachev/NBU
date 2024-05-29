@@ -35,4 +35,17 @@ public class Item implements ITradable {
                 ", value=" + value +
                 '}';
     }
+
+    @Override
+    public boolean equals(final Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (!(o instanceof Item)) {
+            return false;
+        }
+        final Item item = (Item) o;
+        return value == item.value && name.equals(item.name);
+    }
+
 }

@@ -9,19 +9,21 @@ import java.util.List;
 
 public class Inventory {
 
-    List<Item> items;
+    private final List<Item> items;
 
-    Item headPiece;
+    private Item headPiece;
 
-    Item chestPiece;
+    private Item chestPiece;
 
-    Item armsPiece;
+    private Item armsPiece;
 
-    Item feetPiece;
+    private Item feetPiece;
 
-    Item legsPiece;
+    private Item legsPiece;
 
-    int gold;
+    private Item weapon;
+
+    private int gold;
 
     //region initialization
     private Inventory() {
@@ -49,7 +51,7 @@ public class Inventory {
         this.gold += gold;
     }
 
-    public int getGold(){
+    public int getGold() {
         return this.gold;
     }
 
@@ -99,10 +101,112 @@ public class Inventory {
         return legsPiece;
     }
 
+    public Item getWeapon() {
+        return weapon;
+    }
+
     public List<Item> getItems() {
         return items;
     }
 
+    public boolean tryToEquipItem(Item item) {
+        if (!(item instanceof Armor) && !(item instanceof Weapon)) {
+            return false;
+        }
+
+        boolean removed = items.remove(item);
+        if (!removed) {
+            return false;
+        }
+        if (item instanceof Armor) {
+            return tryToEquipArmor((Armor) item);
+        } else {
+            return tryToEquipWeapon((Weapon) item);
+        }
+    }
+
+    private boolean tryToEquipArmor(Armor armor) {
+        switch (armor.getSlot()) {
+            case HEAD:
+                if (tryToUnEquipItem(headPiece)) {
+                    headPiece = armor;
+                }
+                break;
+            case CHEST:
+                if (tryToUnEquipItem(chestPiece)) {
+                    chestPiece = armor;
+                }
+                break;
+            case ARMS:
+                if (tryToUnEquipItem(armsPiece)) {
+                    armsPiece = armor;
+                }
+                break;
+            case LEGS:
+                if (tryToUnEquipItem(legsPiece)) {
+                    legsPiece = armor;
+                }
+                break;
+            case FEET:
+                if (tryToUnEquipItem(feetPiece)) {
+                    feetPiece = armor;
+                }
+                break;
+        }
+        return true;
+    }
+
+    private boolean tryToEquipWeapon(Weapon weapon) {
+        if (this.weapon != null) {
+            tryToUnEquipItem(this.weapon);
+        }
+        this.weapon = weapon;
+        return true;
+    }
+
+    public boolean tryToDropItem(Item item) {
+        return items.remove(item);
+    }
+
+    public boolean tryToUnEquipItem(Item item) {
+        if (items.size() >= 20) {
+            return false;
+        }
+        if (headPiece != null && headPiece.equals(item)) {
+            headPiece = null;
+            items.add(item);
+        }
+        if (chestPiece != null && chestPiece.equals(item)) {
+            chestPiece = null;
+            items.add(item);
+        }
+        if (armsPiece != null && armsPiece.equals(item)) {
+            armsPiece = null;
+            items.add(item);
+        }
+        if (feetPiece != null && feetPiece.equals(item)) {
+            feetPiece = null;
+            items.add(item);
+        }
+        if (legsPiece != null && legsPiece.equals(item)) {
+            legsPiece = null;
+            items.add(item);
+        }
+        if (weapon != null && weapon.equals(item)) {
+            weapon = null;
+            items.add(item);
+        }
+        return true;
+    }
+
+    public boolean tryToSellItem(Item item) {
+        boolean removed = items.remove(item);
+        if (!removed) {
+            return false;
+        }
+        gold += item.sellPrice();
+        return true;
+    }
 
     public static Inventory getInstance() {
         return instance;
