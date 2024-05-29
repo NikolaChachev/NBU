@@ -1,6 +1,6 @@
 package com.example.nbu.presentation.character;
 
-import com.example.nbu.presentation.combat.Util;
+import com.example.nbu.presentation.combat.CombatUtil;
 import com.example.nbu.presentation.inventory.Inventory;
 
 public class Adventurer extends BaseCharacter {
@@ -33,8 +33,8 @@ public class Adventurer extends BaseCharacter {
         this.currentExperience+=experience;
         if(currentExperience >= requiredExperienceForNextLevel){
             currentExperience-=requiredExperienceForNextLevel;
-            this.expPointsToSpend = Util.getPointsBasedOnLevel(this.level);
-            this.requiredExperienceForNextLevel = Util.getNextLevelExpRequirements(this.level);
+            this.expPointsToSpend = CombatUtil.getPointsBasedOnLevel(this.level);
+            this.requiredExperienceForNextLevel = CombatUtil.getNextLevelExpRequirements(this.level);
             this.level++;
         }
     }

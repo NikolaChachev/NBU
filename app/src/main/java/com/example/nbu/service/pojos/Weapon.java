@@ -36,7 +36,7 @@ public class Weapon extends Item {
 //                " |rating: " + rating;
         //todo update to somethign ebetter
         return String.format("%-10s", super.getName()) +
-                String.format("%-14s", " | value: " + super.getValue()) +
+                String.format("%-14s", " | value: " + super.getValue() + "g") +
                 String.format("%-28s", " | Strength requirement: " + StrRequirement) +
                 String.format("%-22s", " | Bonus damage: " + bonusDamage) +
                 " | rating: " +

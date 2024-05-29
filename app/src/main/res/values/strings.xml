@@ -26,4 +26,5 @@
     <string name="tavern_rest_button_text">Rest</string>
     <string name="tavern_see_stats_button_text">See stats</string>
     <string name="tavern_leave_tavern_button_text">Leave Tavern</string>
+    <string name="shop_navigation_button_text">Leave Shop</string>
 </resources>

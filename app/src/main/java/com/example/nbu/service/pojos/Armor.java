@@ -40,10 +40,18 @@ public class Armor extends Item {
     @NonNull
     @Override
     public String toString() {
-        String slot;
-        slot = this.slot.toString().toLowerCase(Locale.ROOT);
-        return "name: " + super.getName() + " value: " + super.getValue() + " slot:" + slot
-                + " agiRequirement: " + agiRequirement + " armor: " + armor + " rating: " + rating;
+//        String slot;
+//        slot = this.slot.toString().toLowerCase(Locale.ROOT);
+//        return "name: " + super.getName() + " value: " + super.getValue() + " slot:" + slot
+//                + " agiRequirement: " + agiRequirement + " armor: " + armor + " rating: " + rating;
+
+        return String.format("%-10s", super.getName()) +
+                String.format("%-14s", " | value: " + super.getValue() + "g") +
+                String.format("%-28s", " | Agility requirement: " + agiRequirement) +
+                String.format("%-22s", " | Bonus armor: " + armor) +
+                String.format("%-14s", " | slot: " + slot) +
+                " | rating: " +
+                rating;
     }
 
 }
