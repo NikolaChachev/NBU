@@ -2,19 +2,17 @@ package com.example.nbu.service.data;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
-
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.service.coroutines.ACoroutineContextProvider;
-
-import javax.inject.Inject;
-
 import dagger.hilt.android.lifecycle.HiltViewModel;
+import javax.inject.Inject;
 
 @HiltViewModel
 public class SharedCharacterViewModel extends AbstractViewModel {
 
     private final MutableLiveData<Double> characterHealth = new MutableLiveData<>();
+
     public LiveData<Double> _characterHealth = characterHealth;
 
     private final Adventurer adventurer;

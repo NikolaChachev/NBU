@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/stats_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/layout_stats_title_text"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/stats_strength"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/stats_agility"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stats_title"
+            tools:text="Strength: 5" />
+
+        <TextView
+            android:id="@+id/stats_agility"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/stats_strength"
+            app:layout_constraintTop_toBottomOf="@id/stats_title"
+            tools:text="Agility: 10" />
+
+        <TextView
+            android:id="@+id/stats_speed"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/stats_armor"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stats_strength"
+            tools:text="Speed: 20" />
+
+        <TextView
+            android:id="@+id/stats_armor"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/stats_speed"
+            app:layout_constraintTop_toTopOf="@id/stats_speed"
+            tools:text="Armor: 20" />
+
+        <TextView
+            android:id="@+id/stats_health"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/stats_damage"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stats_speed"
+            tools:text="Health: 100" />
+
+        <TextView
+            android:id="@+id/stats_damage"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/stats_health"
+            app:layout_constraintTop_toBottomOf="@id/stats_speed"
+            tools:text="Damage: 100" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

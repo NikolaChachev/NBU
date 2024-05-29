@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/equipment_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/equipment_title_text"
+            android:textSize="26sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/equipment_weapon"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/equipment_head_item"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/equipment_title"
+            tools:text="Weapon: Great Axe" />
+
+        <TextView
+            android:id="@+id/equipment_head_item"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/equipment_weapon"
+            app:layout_constraintTop_toBottomOf="@id/equipment_title"
+            tools:text="Helmet: Horned helm" />
+
+        <TextView
+            android:id="@+id/equipment_chest_item"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/equipment_arms"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/equipment_weapon"
+            tools:text="Chest armor: Full plate" />
+
+        <TextView
+            android:id="@+id/equipment_arms"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/equipment_chest_item"
+            app:layout_constraintTop_toTopOf="@id/equipment_chest_item"
+            tools:text="Arms: Silver arm plate" />
+
+        <TextView
+            android:id="@+id/equipment_legs"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toStartOf="@id/equipment_feet"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/equipment_chest_item"
+            tools:text="Legs: Silver leggings" />
+
+        <TextView
+            android:id="@+id/equipment_feet"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/equipment_legs"
+            app:layout_constraintTop_toTopOf="@id/equipment_legs"
+            tools:text="Feet: Silver boots" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

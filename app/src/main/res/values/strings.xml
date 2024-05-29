@@ -27,4 +27,21 @@
     <string name="tavern_see_stats_button_text">See stats</string>
     <string name="tavern_leave_tavern_button_text">Leave Tavern</string>
     <string name="shop_navigation_button_text">Leave Shop</string>
+    <string name="equipment_title_text">Equipment</string>
+    <string name="inventory_subtitle_text">Inventory</string>
+    <string name="layout_stats_title_text">Stats</string>
+
+    <string name="layout_equipment_helmet_text">Helmet: %1$s</string>
+    <string name="layout_equipment_chest_text">Chest armor: %1$s</string>
+    <string name="layout_equipment_arms_text">Arms: %1$s</string>
+    <string name="layout_equipment_legs_text">Legs: %1$s</string>
+    <string name="layout_equipment_feet_text">Feet: %1$s</string>
+    <string name="layout_equipment_weapon_text">Weapon: %1$s</string>
+
+    <string name="layout_stats_strength_text">Strength: %1$s</string>
+    <string name="layout_stats_agility_text">Agility: %1$s</string>
+    <string name="layout_stats_speed_text">Speed: %1$s</string>
+    <string name="layout_stats_armor_text">Armor: %1$s</string>
+    <string name="layout_stats_health_text">Health: %1$s/%2$s</string>
+    <string name="layout_stats_damage_text">Damage: %1$s</string>
 </resources>

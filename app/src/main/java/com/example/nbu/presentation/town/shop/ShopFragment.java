@@ -66,7 +66,7 @@ public class ShopFragment extends AbstractFragment<ShopFragmentBinding, ShopView
             } else {
                 createShortToast("Not enough gold to buy item!");
             }
-            return false;
+            return true;
         });
     }
 
