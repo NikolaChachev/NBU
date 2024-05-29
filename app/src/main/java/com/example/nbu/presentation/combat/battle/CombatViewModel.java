@@ -8,7 +8,7 @@ import com.example.nbu.R;
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.presentation.character.Enemy;
-import com.example.nbu.presentation.combat.Util;
+import com.example.nbu.presentation.combat.CombatUtil;
 import com.example.nbu.presentation.combat.summary.SummaryFragment;
 import com.example.nbu.presentation.inventory.Inventory;
 import com.example.nbu.service.coroutines.ACoroutineContextProvider;
@@ -114,7 +114,7 @@ public class CombatViewModel extends AbstractViewModel {
             default:
                 enemyIndex = rn.nextInt(6) + 21;
         }
-        enemy = Util.enemies.get(enemyIndex);
+        enemy = CombatUtil.enemies.get(enemyIndex);
         enemy.heal();
         _encounterText.postValue(ENCOUNTER_PREFIX + enemy.getName());
         combatStatus.postValue(CombatStatus.IN_PROGRESS);

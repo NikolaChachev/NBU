@@ -58,7 +58,7 @@ public abstract class AbstractFragment<B extends ViewDataBinding, VM extends Abs
         FragmentActivity activity = getActivity();
         if (activity instanceof AbstractActivity) {
             Bundle navArgs = viewModel.postNavigationArgs();
-            if (args != null) {
+            if (args != null && navArgs != null) {
                 args.putAll(navArgs);
             }
             ((AbstractActivity) activity).openView(clazz, args);

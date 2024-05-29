@@ -11,6 +11,7 @@ import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.presentation.character.AdventurerStat;
 import com.example.nbu.presentation.combat.encounter.EncounterFragment;
+import com.example.nbu.presentation.town.TownCenterFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -80,7 +81,7 @@ public class SummaryFragment extends AbstractFragment<FragmentSummaryBinding, Su
             navigateToView(EncounterFragment.class, null);
         });
         binding.summaryGoToTownButton.setOnClickListener(v -> {
-            //todo
+            navigateToView(TownCenterFragment.class, null);
         });
     }
 

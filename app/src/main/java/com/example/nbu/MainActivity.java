@@ -8,6 +8,8 @@ import com.example.nbu.mvvm.vm.EmptyViewModel;
 import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.presentation.combat.encounter.EncounterFragment;
 import com.example.nbu.presentation.inventory.InventoryFragment;
+import com.example.nbu.presentation.town.shop.ShopAdapter;
+import com.example.nbu.presentation.town.shop.ShopFragment;
 import com.example.nbu.service.data.SharedCharacterViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 

@@ -18,13 +18,13 @@ public class Item implements ITradable {
     }
 
     @Override
-    public double sellPrice() {
+    public int sellPrice() {
         double percentage = value / 10.d * 7;
         return (int)percentage;
     }
 
     @Override
-    public double buyPrice() {
+    public int buyPrice() {
         return value;
     }
 

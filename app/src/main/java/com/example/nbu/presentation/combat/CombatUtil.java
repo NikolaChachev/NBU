@@ -1,9 +1,12 @@
 package com.example.nbu.presentation.combat;
 
 import com.example.nbu.presentation.character.Enemy;
+import com.example.nbu.service.pojos.Armor;
+import com.example.nbu.service.pojos.ArmorTypes;
+import com.example.nbu.service.pojos.Weapon;
 import java.util.ArrayList;
 
-public class Util {
+public class CombatUtil {
 
     public static final ArrayList<Enemy> enemies = new ArrayList<>() {
         {
@@ -34,6 +37,61 @@ public class Util {
             add(new Enemy("fallen angel", 9, 1500.d, 40, 400, 20, 50, 35));
             add(new Enemy("hellhound", 9, 1000.d, 25, 150, 15, 25, 45));
             add(new Enemy("unltralisk", 9, 2000.d, 65, 550, 2, 25, 23));
+        }
+    };
+
+    public static final ArrayList<Weapon> weapons = new ArrayList<>() {
+        {
+            add(new Weapon("log", 5, 0, 4, 1));
+            add(new Weapon("rusty dagger", 10, 2, 7, 1));
+            add(new Weapon("kitchen knife", 20, 2, 10, 1));
+            add(new Weapon("bat", 60, 4, 15, 2));
+            add(new Weapon("ordinary dagger", 80, 6, 20, 2));
+            add(new Weapon("military knife", 100, 6, 25, 2));
+            add(new Weapon("scythe", 200, 8, 30, 3));
+            add(new Weapon("small axe", 300, 8, 33, 3));
+            add(new Weapon("short sword", 350, 10, 50, 3));
+            add(new Weapon("axe", 500, 10, 100, 4));
+            add(new Weapon("katana", 600, 12, 125, 4));
+            add(new Weapon("mace", 725, 14, 145, 4));
+            add(new Weapon("spear", 850, 16, 165, 4));
+            add(new Weapon("poleaxe", 1000, 16, 195, 4));
+            add(new Weapon("longsword", 1500, 18, 245, 5));
+            add(new Weapon("double bladed axe", 2000, 20, 295, 5));
+            add(new Weapon("warhammer", 2500, 24, 365, 5));
+            add(new Weapon("great sword", 5000, 28, 445, 6));
+            add(new Weapon("epic warmace", 8000, 30, 495, 6));
+            add(new Weapon("heartseeker", 10000, 40, 645, 6));
+        }
+    };
+
+    public static final ArrayList<Armor> armorSets = new ArrayList<>() {
+        {
+            add(new Armor("old helmet", 30, 1, 2, 1, ArmorTypes.HEAD));
+            add(new Armor("old chest piece", 40, 1, 4, 1, ArmorTypes.CHEST));
+            add(new Armor("old armguards", 15, 1, 1, 1, ArmorTypes.ARMS));
+            add(new Armor("old pants", 30, 1, 2, 1, ArmorTypes.LEGS));
+            add(new Armor("old boots", 15, 1, 1, 1, ArmorTypes.FEET));
+            add(new Armor("leather helmet", 125, 4, 4, 2, ArmorTypes.HEAD));
+            add(new Armor("leather breastplate", 250, 4, 7, 2, ArmorTypes.CHEST));
+            add(new Armor("leather armguards", 80, 4, 3, 2, ArmorTypes.ARMS));
+            add(new Armor("leather cuisse", 125, 4, 4, 2, ArmorTypes.LEGS));
+            add(new Armor("leather boots", 40, 4, 2, 2, ArmorTypes.FEET));
+            add(new Armor("bronze helmet", 1000, 10, 9, 3, ArmorTypes.HEAD));
+            add(new Armor("bronze breastplate", 2500, 10, 15, 3, ArmorTypes.CHEST));
+            add(new Armor("bronze armguards", 250, 10, 4, 3, ArmorTypes.ARMS));
+            add(new Armor("bronze cuisse", 1000, 10, 9, 3, ArmorTypes.LEGS));
+            add(new Armor("bronze boots", 80, 10, 3, 3, ArmorTypes.FEET));
+            add(new Armor("silver helmet", 5000, 15, 12, 4, ArmorTypes.HEAD));
+            add(new Armor("silver breastplate", 8500, 15, 25, 4, ArmorTypes.CHEST));
+            add(new Armor("silver armguards", 2500, 15, 7, 4, ArmorTypes.ARMS));
+            add(new Armor("silver cuisse", 5000, 15, 12, 4, ArmorTypes.LEGS));
+            add(new Armor("silver boots", 250, 15, 4, 4, ArmorTypes.FEET));
+            add(new Armor("golden helmet", 12500, 2, 25, 5, ArmorTypes.HEAD));
+            add(new Armor("golden breastplate", 25000, 2, 35, 5, ArmorTypes.CHEST));
+            add(new Armor("golden armguards", 10000, 2, 10, 5, ArmorTypes.ARMS));
+            add(new Armor("golden cuisse", 12500, 2, 25, 5, ArmorTypes.LEGS));
+            add(new Armor("golden boots", 1000, 2, 5, 5, ArmorTypes.FEET));
         }
     };
 

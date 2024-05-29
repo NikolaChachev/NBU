@@ -31,15 +31,6 @@ public class Inventory {
         Weapon weapon1 = new Weapon("Sword", 100, 2, 4, 1);
         Armor armor = new Armor("golden feet", 1000, 30, 40, 1, ArmorTypes.FEET);
         items.add(weapon1);
-        items.add(weapon);
-        items.add(weapon);
-        items.add(weapon);
-        items.add(weapon);
-        items.add(weapon);
-        items.add(weapon);
-        items.add(weapon1);
-        items.add(weapon1);
-        items.add(weapon1);
         items.add(armor);
         headPiece = new Armor("horned helm", 500, 3, 10, 1, ArmorTypes.HEAD);
     }
@@ -47,7 +38,7 @@ public class Inventory {
     private static final Inventory instance = new Inventory();
     //endregion
 
-    public void putItem(Item item) {
+    public void addItem(Item item) {
         if (items.size() > 19) {
             throw new IllegalStateException("Inventory is fill");
         }
