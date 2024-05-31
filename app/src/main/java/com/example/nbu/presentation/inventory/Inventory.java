@@ -1,5 +1,6 @@
 package com.example.nbu.presentation.inventory;
 
+import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.service.pojos.Armor;
 import com.example.nbu.service.pojos.ArmorTypes;
 import com.example.nbu.service.pojos.Item;
@@ -29,12 +30,10 @@ public class Inventory {
     private Inventory() {
         items = new ArrayList<>();
         //todo thi is for testing, remove later on.
-        Weapon weapon = new Weapon("Axe", 200, 5, 10, 2);
         Weapon weapon1 = new Weapon("Sword", 100, 2, 4, 1);
         Armor armor = new Armor("golden feet", 1000, 30, 40, 1, ArmorTypes.FEET);
         items.add(weapon1);
         items.add(armor);
-        headPiece = new Armor("horned helm", 500, 3, 10, 1, ArmorTypes.HEAD);
     }
 
     private static final Inventory instance = new Inventory();
@@ -66,19 +65,6 @@ public class Inventory {
             }
             items.add(item);
         }
-    }
-
-    public Item removeItem(int index) {
-        if (index < 0 || index > items.size() - 1) {
-            throw new IndexOutOfBoundsException();
-        }
-        return items.remove(index);
-    }
-
-    public List<Item> removeAll() {
-        List<Item> copy = new ArrayList<>(items);
-        items.clear();
-        return copy;
     }
 
     public Item getHeadPiece() {
@@ -126,6 +112,10 @@ public class Inventory {
     }
 
     private boolean tryToEquipArmor(Armor armor) {
+        Adventurer adventurer = Adventurer.getInstance();
+        if (armor.getAgiRequirement() > adventurer.getAgility()) {
+            return false;
+        }
         switch (armor.getSlot()) {
             case HEAD:
                 if (tryToUnEquipItem(headPiece)) {
@@ -153,6 +143,7 @@ public class Inventory {
                 }
                 break;
         }
+        adventurer.applyItemBonuses(armor);
         return true;
     }
 
@@ -160,7 +151,12 @@ public class Inventory {
         if (this.weapon != null) {
             tryToUnEquipItem(this.weapon);
         }
+        Adventurer adventurer = Adventurer.getInstance();
+        if (weapon.getStrRequirement() > adventurer.getStrength()) {
+            return false;
+        }
         this.weapon = weapon;
+        adventurer.applyItemBonuses(weapon);
         return true;
     }
 
@@ -172,29 +168,40 @@ public class Inventory {
         if (items.size() >= 20) {
             return false;
         }
+        Adventurer adventurer = Adventurer.getInstance();
+        boolean unEquipPerformed = false;
         if (headPiece != null && headPiece.equals(item)) {
             headPiece = null;
             items.add(item);
+            unEquipPerformed = true;
         }
         if (chestPiece != null && chestPiece.equals(item)) {
             chestPiece = null;
             items.add(item);
+            unEquipPerformed = true;
         }
         if (armsPiece != null && armsPiece.equals(item)) {
             armsPiece = null;
             items.add(item);
+            unEquipPerformed = true;
         }
         if (feetPiece != null && feetPiece.equals(item)) {
             feetPiece = null;
             items.add(item);
+            unEquipPerformed = true;
         }
         if (legsPiece != null && legsPiece.equals(item)) {
             legsPiece = null;
             items.add(item);
+            unEquipPerformed = true;
         }
         if (weapon != null && weapon.equals(item)) {
             weapon = null;
             items.add(item);
+            unEquipPerformed = true;
+        }
+        if (unEquipPerformed) {
+            adventurer.removeItemBonuses(item);
         }
         return true;
     }

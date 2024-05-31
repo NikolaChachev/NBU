@@ -6,7 +6,7 @@ public abstract class BaseCharacter {
     protected int level;
     private double maxHealth;
     private double currentHealth;
-    private int armor;
+    protected int armor;
     protected int speed;
     protected int strength;
     protected int agility;

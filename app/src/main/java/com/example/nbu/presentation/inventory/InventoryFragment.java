@@ -1,5 +1,6 @@
 package com.example.nbu.presentation.inventory;
 
+import android.app.AlertDialog;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.PopupMenu;
@@ -22,20 +23,67 @@ public class InventoryFragment extends AbstractFragment<FragmentInventoryBinding
 
     private InventoryAdapter adapter;
 
+    private Inventory inventory;
+
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        Inventory inventory = Inventory.getInstance();
+        inventory = Inventory.getInstance();
         adapter = new InventoryAdapter(inventory.getItems(), this::handleItemClick);
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         binding.inventoryRecycleView.setAdapter(adapter);
         binding.inventoryRecycleView.setLayoutManager(layoutManager);
         setupEquipmentTexts();
-        binding.inventoryEquipment.equipmentChestItem.setOnClickListener(item -> {
+        setupEquipmentClicks();
+    }
+
+    private void setupEquipmentClicks() {
+        binding.inventoryEquipment.equipmentChestItem.setOnClickListener(v -> {
             //todo dialog with stats and option to unEquip
-            createShortToast(inventory.getHeadPiece().toString());
+            buildAlertDialog(inventory.getChestPiece());
         });
+        binding.inventoryEquipment.equipmentHeadItem.setOnClickListener(v -> {
+            //todo dialog with stats and option to unEquip
+            buildAlertDialog(inventory.getHeadPiece());
+        });
+        binding.inventoryEquipment.equipmentArms.setOnClickListener(v -> {
+            //todo dialog with stats and option to unEquip
+            buildAlertDialog(inventory.getArmsPiece());
+        });
+        binding.inventoryEquipment.equipmentLegs.setOnClickListener(v -> {
+            //todo dialog with stats and option to unEquip
+            buildAlertDialog(inventory.getLegsPiece());
+        });
+        binding.inventoryEquipment.equipmentFeet.setOnClickListener(v -> {
+            //todo dialog with stats and option to unEquip
+            buildAlertDialog(inventory.getFeetPiece());
+        });
+        binding.inventoryEquipment.equipmentWeapon.setOnClickListener(v -> {
+            //todo dialog with stats and option to unEquip
+            buildAlertDialog(inventory.getWeapon());
+        });
+
+    }
+
+    private void buildAlertDialog(Item item) {
+        final String title = "Equipment";
+        final String message = item != null ? item.toString() : "No equipment";
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity())
+                .setTitle(title)
+                .setMessage(message)
+                .setPositiveButton(R.string.inventory_equipment_dialog_positive_button, (dialogInterface, i) -> {
+                    //do nothing, just close the dialog
+                });
+        if (item != null) {
+            builder.setNegativeButton(R.string.inventory_equipment_dialog_negative_button, (dialogInterface, i) -> {
+                //try to unEquip item
+                inventory.tryToUnEquipItem(item);
+                refreshViews();
+            });
+        }
+        builder.create().show();
     }
 
     private void handleItemClick(Item item, View v) {
@@ -68,7 +116,6 @@ public class InventoryFragment extends AbstractFragment<FragmentInventoryBinding
     }
 
     private void setupEquipmentTexts() {
-        Inventory inventory = Inventory.getInstance();
         String text = inventory.getHeadPiece() != null ? inventory.getHeadPiece().getName() : "Empty";
         binding.inventoryEquipment.equipmentHeadItem.setText(getString(R.string.layout_equipment_helmet_text, text));
         text = inventory.getChestPiece() != null ? inventory.getChestPiece().getName() : "Empty";
@@ -89,8 +136,8 @@ public class InventoryFragment extends AbstractFragment<FragmentInventoryBinding
         binding.inventoryStats.statsAgility.setText(getString(R.string.layout_stats_agility_text, text));
         text = String.valueOf(adventurer.getSpeed());
         binding.inventoryStats.statsSpeed.setText(getString(R.string.layout_stats_speed_text, text));
-        text = String.valueOf((int)adventurer.getCurrentHealth());
-        String maxHealth = String.valueOf((int)adventurer.getMaxHealth());
+        text = String.valueOf((int) adventurer.getCurrentHealth());
+        String maxHealth = String.valueOf((int) adventurer.getMaxHealth());
         binding.inventoryStats.statsHealth.setText(getString(R.string.layout_stats_health_text, text, maxHealth));
         text = String.valueOf(adventurer.getArmor());
         binding.inventoryStats.statsArmor.setText(getString(R.string.layout_stats_armor_text, text));

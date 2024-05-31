@@ -3,6 +3,9 @@
     <string name="encounter_dialog_continue_button">Continue</string>
     <string name="encounter_dialog_return_to_town_button">To Town</string>
 
+    <string name="inventory_equipment_dialog_positive_button">OK</string>
+    <string name="inventory_equipment_dialog_negative_button">UnEquip</string>
+
     <string name="combat_left_button_progress">Next Round</string>
     <string name="combat_right_button_progress">Skip Battle</string>
     <string name="combat_left_button_victory">Summary</string>

@@ -11,6 +11,7 @@ import com.example.nbu.databinding.FragmentEncounterBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.presentation.combat.battle.CombatFragment;
 import com.example.nbu.presentation.combat.battle.CombatViewModel;
+import com.example.nbu.presentation.town.TownCenterFragment;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -55,6 +56,7 @@ public class EncounterFragment extends AbstractFragment<FragmentEncounterBinding
                 })
                 .setNegativeButton(R.string.encounter_dialog_return_to_town_button, (dialogInterface, i) -> {
                     //return to Town
+                    navigateToView(TownCenterFragment.class, null);
                 });
         builder.create().show();
     }
