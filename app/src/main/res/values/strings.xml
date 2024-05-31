@@ -47,4 +47,8 @@
     <string name="layout_stats_armor_text">Armor: %1$s</string>
     <string name="layout_stats_health_text">Health: %1$s/%2$s</string>
     <string name="layout_stats_damage_text">Damage: %1$s</string>
+    <string name="main_menu_quit_button_text">Quit</string>
+    <string name="main_menu_new_game_button_text">New Game</string>
+
+    <string name="main_activity_character_health_text">%1$d/%2$d</string>
 </resources>
