@@ -15,6 +15,10 @@ public class SharedCharacterViewModel extends AbstractViewModel {
 
     public LiveData<Double> _characterHealth = characterHealth;
 
+    private final MutableLiveData<Boolean> gameStarted = new MutableLiveData<>();
+
+    public LiveData<Boolean> _gameStarted = gameStarted;
+
     private final Adventurer adventurer;
 
     @Inject
@@ -28,8 +32,8 @@ public class SharedCharacterViewModel extends AbstractViewModel {
         characterHealth.setValue(currentHealth);
     }
 
-    public void refreshHealth() {
-        adventurer.heal();
+    public void notifyGameStarted() {
+        gameStarted.setValue(true);
     }
 
     public void updateCurrentHealth() {

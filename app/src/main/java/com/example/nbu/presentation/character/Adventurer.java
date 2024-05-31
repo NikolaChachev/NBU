@@ -21,8 +21,9 @@ public class Adventurer extends BaseCharacter {
         requiredExperienceForNextLevel = 100;
     }
 
-    public static void initializeAdventurer(String name) {
-        instance = new Adventurer(name, 1, 12000.d, 0, 50, 100, 100, 5);
+    public static Adventurer initializeAdventurer(String name) {
+        instance = new Adventurer(name, 1, 12000.d, 0, 50, 1, 100, 5);
+        return instance;
     }
 
     public static Adventurer getInstance() {
