@@ -7,6 +7,7 @@ import androidx.lifecycle.MutableLiveData;
 import com.example.nbu.R;
 import com.example.nbu.mvvm.AbstractViewModel;
 import com.example.nbu.presentation.character.Adventurer;
+import com.example.nbu.presentation.character.BaseCharacter;
 import com.example.nbu.presentation.character.Enemy;
 import com.example.nbu.presentation.combat.CombatUtil;
 import com.example.nbu.presentation.combat.summary.SummaryFragment;
@@ -163,69 +164,78 @@ public class CombatViewModel extends AbstractViewModel {
 
     private void tickCombatTime() {
         combatLogs.add(new CombatLog(currentRound + " round started", R.color.black));
-        while (adventurerTimer > 0) {
+        while (adventurerTimer > 0 || enemyTimer > 0) {
             adventurerTimer -= adventurer.getSpeed();
             enemyTimer -= enemy.getSpeed();
         }
         String log;
         while (adventurerTimer <= 0) {
             adventurerTimer += ACTION_TIMER_STARTING_VALUE;
-            log = adventurer.getName() + " attacks!";
-            combatLogs.add(new CombatLog(log, R.color.black));
-            Random rn = new Random();
-            int value = rn.nextInt() % 101;
-            if (value < enemy.getAgility()) {
-                log = enemy.getName() + " dodged the attack!";
-                combatLogs.add(new CombatLog(log, R.color.blue));
-            } else {
-                value = rn.nextInt(101);
-                double damageDone = adventurer.getDamage();
-                if (value <= enemy.getStrength()) {
-                    damageDone *= 0.3;
-                    log = enemy.getName() + " blocks the attack!";
-                    combatLogs.add(new CombatLog(log, R.color.blue));
-                } else {
-                    value = rn.nextInt(101);
-                    if (value <= adventurer.getAgility()) {
-                        log = adventurer.getName() + " critically strikes!";
-                        combatLogs.add(new CombatLog(log, R.color.green));
-                        damageDone *= 2;
-                    }
-                }
-                if (enemy.getArmor() > 0) {
-                    double damageReduction = (double) enemy.getArmor() / 100;
-                    damageDone = damageDone - damageReduction * damageDone;
-                }
-                log = adventurer.getName() + " deals " + damageDone + " damage to " + enemy.getName();
-                combatLogs.add(new CombatLog(log, R.color.yellow));
-                enemy.takeDamage(damageDone);
-                if (enemy.isDead()) {
-                    log = enemy.getName() + " is dead! ";
-                    combatLogs.add(new CombatLog(log, R.color.green));
-                    combatStatus.postValue(CombatStatus.VICTORY);
-                    expReward = enemy.getLevel() * 50;
-                    goldReward = enemy.getLevel() * 10;
-                    adventurer.receiveExperience(expReward);
-                    Inventory.getInstance().addGold(goldReward);
-                    //todo add a loot generator that will give random loot
-                    combatStatus.postValue(CombatStatus.VICTORY);
-                    return;
-                }
-                log = enemy.getName() + " has " + enemy.getCurrentHealth() + " health left";
-                combatLogs.add(new CombatLog(log, R.color.black));
+            emulateAttack(adventurer, enemy);
+            if (enemy.isDead()) {
+                log = enemy.getName() + " is dead! ";
+                combatLogs.add(new CombatLog(log, R.color.green));
+                combatStatus.postValue(CombatStatus.VICTORY);
+                expReward = enemy.getLevel() * 50;
+                goldReward = enemy.getLevel() * 10;
+                adventurer.receiveExperience(expReward);
+                Inventory.getInstance().addGold(goldReward);
+                //todo add a loot generator that will give random loot
+                combatStatus.postValue(CombatStatus.VICTORY);
+                return;
             }
-            System.out.println("-----------------------------------------");
+            log = enemy.getName() + " has " + enemy.getCurrentHealth() + " health left";
+            combatLogs.add(new CombatLog(log, R.color.black));
         }
+
         adventurerTimer = ACTION_TIMER_STARTING_VALUE;
         while (enemyTimer <= 0) {
             enemyTimer += ACTION_TIMER_STARTING_VALUE;
-            adventurer.takeDamage(enemy.getDamage());
+            emulateAttack(enemy, adventurer);
             if (adventurer.isDead()) {
                 combatStatus.postValue(CombatStatus.DEFEAT);
                 return;
             }
         }
+        enemyTimer = ACTION_TIMER_STARTING_VALUE;
         ++currentRound;
+        log = "-----------------------------------------";
+        combatLogs.add(new CombatLog(log, R.color.black));
+    }
+
+    private void emulateAttack(BaseCharacter attacker, BaseCharacter defender) {
+        String log;
+        log = attacker.getName() + " attacks!";
+        combatLogs.add(new CombatLog(log, R.color.black));
+        Random rn = new Random();
+        int value = rn.nextInt() % 101;
+        if (value < defender.getAgility()) {
+            log = defender.getName() + " dodged the attack!";
+            combatLogs.add(new CombatLog(log, defender.getDodgeActionColor()));
+            return;
+        }
+
+        value = rn.nextInt(101);
+        double damageDone = attacker.getDamage();
+        if (value <= defender.getStrength()) {
+            damageDone *= 0.3;
+            log = defender.getName() + " blocks the attack!";
+            combatLogs.add(new CombatLog(log, defender.getBlockActionColor()));
+        } else {
+            value = rn.nextInt(101);
+            if (value <= attacker.getAgility()) {
+                log = attacker.getName() + " critically strikes!";
+                combatLogs.add(new CombatLog(log, attacker.getCritActionColor()));
+                damageDone *= 2;
+            }
+        }
+        if (defender.getArmor() > 0) {
+            double damageReduction = (double) defender.getArmor() / 100;
+            damageDone = damageDone - damageReduction * damageDone;
+        }
+        log = attacker.getName() + " deals " + damageDone + " damage to " + defender.getName();
+        combatLogs.add(new CombatLog(log, attacker.getDamageActionColor()));
+        defender.takeDamage(damageDone);
     }
 
     public List<CombatLog> getLogs() {

@@ -1,5 +1,7 @@
 package com.example.nbu.presentation.character;
 
+import androidx.annotation.NonNull;
+
 public abstract class BaseCharacter {
     private String name;
 
@@ -76,6 +78,11 @@ public abstract class BaseCharacter {
         return this.currentHealth < 1;
     }
 
+    public abstract int getDodgeActionColor();
+    public abstract int getBlockActionColor();
+    public abstract int getCritActionColor();
+    public abstract int getDamageActionColor();
+    @NonNull
     @Override
     public String toString() {
         return this.name + " | lvl:" + this.level + "  hp:" + this.maxHealth

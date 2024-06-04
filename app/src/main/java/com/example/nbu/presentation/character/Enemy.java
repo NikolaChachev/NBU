@@ -1,7 +1,7 @@
 package com.example.nbu.presentation.character;
 
+import com.example.nbu.R;
 import com.example.nbu.service.pojos.Item;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +19,26 @@ public class Enemy extends BaseCharacter implements ILootable {
     @Override
     public double getDamage() {
         return baseDamage;
+    }
+
+    @Override
+    public int getDodgeActionColor() {
+        return R.color.enemy_dodge_color;
+    }
+
+    @Override
+    public int getBlockActionColor() {
+        return R.color.enemy_block_color;
+    }
+
+    @Override
+    public int getCritActionColor() {
+        return R.color.enemy_crit_color;
+    }
+
+    @Override
+    public int getDamageActionColor() {
+        return R.color.enemy_damage_color;
     }
 
     @Override

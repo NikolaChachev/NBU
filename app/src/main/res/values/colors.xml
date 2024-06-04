@@ -6,5 +6,13 @@
     <color name="yellow">#FFEB3B</color>
     <color name="orange">#FF9800</color>
     <color name="green">#4CAF50</color>
+    <color name="adventurer_dodge_color">#00FFAE</color>
+    <color name="adventurer_block_color">#7A8700</color>
+    <color name="adventurer_crit_color">#23FF00</color>
+    <color name="adventurer_damage_color">#F45C5C</color>
+    <color name="enemy_dodge_color">#915A29</color>
+    <color name="enemy_block_color">#002BFF</color>
+    <color name="enemy_crit_color">#9C00FF</color>
+    <color name="enemy_damage_color">#FF0000</color>
     <color name="blue">#03A9F4</color>
 </resources>

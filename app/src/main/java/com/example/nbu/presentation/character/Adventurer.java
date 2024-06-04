@@ -1,5 +1,6 @@
 package com.example.nbu.presentation.character;
 
+import com.example.nbu.R;
 import com.example.nbu.presentation.combat.CombatUtil;
 import com.example.nbu.presentation.inventory.Inventory;
 import com.example.nbu.service.pojos.Armor;
@@ -22,7 +23,7 @@ public class Adventurer extends BaseCharacter {
     }
 
     public static Adventurer initializeAdventurer(String name) {
-        instance = new Adventurer(name, 1, 12000.d, 0, 50, 1, 100, 5);
+        instance = new Adventurer(name, 1, 12000.d, 0, 50, 1, 10, 5);
         return instance;
     }
 
@@ -98,6 +99,26 @@ public class Adventurer extends BaseCharacter {
     @Override
     public double getDamage() {
         return baseDamage;
+    }
+
+    @Override
+    public int getDodgeActionColor() {
+        return R.color.adventurer_dodge_color;
+    }
+
+    @Override
+    public int getBlockActionColor() {
+        return R.color.adventurer_block_color;
+    }
+
+    @Override
+    public int getCritActionColor() {
+        return R.color.adventurer_crit_color;
+    }
+
+    @Override
+    public int getDamageActionColor() {
+        return R.color.adventurer_damage_color;
     }
 
     @Override
