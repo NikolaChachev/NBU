@@ -1,5 +1,6 @@
 package com.example.nbu.presentation.inventory;
 
+import com.example.nbu.R;
 import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.service.pojos.Armor;
 import com.example.nbu.service.pojos.ArmorTypes;
@@ -25,6 +26,8 @@ public class Inventory {
     private Item weapon;
 
     private int gold;
+
+    public final int inventoryImage = R.drawable.inventory;
 
     //region initialization
     private Inventory() {

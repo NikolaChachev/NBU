@@ -7,8 +7,15 @@ import java.util.List;
 
 public class Enemy extends BaseCharacter implements ILootable {
 
-    public Enemy(String name, int level, Double maxHealth, int armor, int speed, int strength, int agility, double baseDamage) {
+    private int drawableSource;
+
+    public Enemy(String name, int level, Double maxHealth, int armor, int speed, int strength, int agility, double baseDamage, int imageSource) {
         super(name, level, maxHealth, armor, speed, strength, agility, baseDamage);
+        this.drawableSource = imageSource;
+    }
+
+    public int getDrawableSource() {
+        return drawableSource;
     }
 
     @Override

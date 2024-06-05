@@ -10,6 +10,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        android:background="@color/grey_medium_transparency"
         />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

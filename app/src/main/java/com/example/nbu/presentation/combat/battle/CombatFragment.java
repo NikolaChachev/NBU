@@ -28,6 +28,7 @@ public class CombatFragment extends AbstractFragment<FragmentCombatBinding, Comb
         binding.setCombatVM(viewModel);
         viewModel.runNextCombatRound();
         sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
+        sharedViewModel.updateCurrentBackground(viewModel.getEnemyImage());
         combatAdapter = new CombatAdapter(viewModel.getLogs(), getContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         binding.combatLogRecycleView.setAdapter(combatAdapter);

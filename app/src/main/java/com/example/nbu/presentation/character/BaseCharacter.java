@@ -3,11 +3,11 @@ package com.example.nbu.presentation.character;
 import androidx.annotation.NonNull;
 
 public abstract class BaseCharacter {
-    private String name;
+    private final String name;
 
     protected int level;
-    private double maxHealth;
-    private double currentHealth;
+    protected double maxHealth;
+    protected double currentHealth;
     protected int armor;
     protected int speed;
     protected int strength;

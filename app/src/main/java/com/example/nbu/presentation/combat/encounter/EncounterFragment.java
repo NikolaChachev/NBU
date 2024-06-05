@@ -6,12 +6,14 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.lifecycle.ViewModelProvider;
 import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentEncounterBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.presentation.combat.battle.CombatFragment;
 import com.example.nbu.presentation.combat.battle.CombatViewModel;
 import com.example.nbu.presentation.town.TownCenterFragment;
+import com.example.nbu.service.data.SharedCharacterViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -39,6 +41,8 @@ public class EncounterFragment extends AbstractFragment<FragmentEncounterBinding
                     break;
             }
         });
+        SharedCharacterViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
+        sharedViewModel.updateCurrentBackground(viewModel.getEnemyImage());
     }
 
     private void buildAlertDialog() {

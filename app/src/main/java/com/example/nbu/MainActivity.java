@@ -2,6 +2,7 @@ package com.example.nbu;
 
 import android.os.Bundle;
 import android.view.View;
+import androidx.core.content.res.ResourcesCompat;
 import androidx.lifecycle.ViewModelProvider;
 import com.example.nbu.databinding.ActivityMainBinding;
 import com.example.nbu.mvvm.activity.AbstractActivity;
@@ -18,11 +19,10 @@ public class MainActivity extends AbstractActivity<ActivityMainBinding, EmptyVie
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Adventurer adventurer = Adventurer.initializeAdventurer("Bobcho");
+        Adventurer adventurer = Adventurer.initializeAdventurer("J`zargo");
         binding.mainCharacterName.setText(adventurer.getName());
         binding.mainCharacterName.setOnClickListener(v -> openView(InventoryFragment.class, null));
         SharedCharacterViewModel sharedViewModel = new ViewModelProvider(this).get(SharedCharacterViewModel.class);
-        openView(MainMenuFragment.class, null);
 
         sharedViewModel._characterHealth.observe(this, data -> {
             binding.mainCharacterHealthBar.setProgress(data.intValue());
@@ -34,6 +34,9 @@ public class MainActivity extends AbstractActivity<ActivityMainBinding, EmptyVie
                 binding.mainCharacterInfoGroup.setVisibility(View.VISIBLE);
             }
         });
+        sharedViewModel._currentBackground.observe(this, data -> binding.mainActivityImage.setImageDrawable(
+                ResourcesCompat.getDrawable(getResources(), data, null)));
+        openView(MainMenuFragment.class, null);
     }
 
     @Override

@@ -27,8 +27,8 @@ public class MainMenuFragment extends AbstractFragment<FragmentMainMenuBinding, 
         });
         SharedCharacterViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
 
+        sharedViewModel.updateCurrentBackground(R.drawable.start_menu);
         binding.mainMenuNewGameButton.setOnClickListener(v -> {
-
             sharedViewModel.notifyGameStarted();
             navigateToView(EncounterFragment.class, null);
         });
