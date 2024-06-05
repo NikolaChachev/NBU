@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import com.example.nbu.BR;
 import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentSummaryBinding;
@@ -12,6 +13,7 @@ import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.presentation.character.AdventurerStat;
 import com.example.nbu.presentation.combat.encounter.EncounterFragment;
 import com.example.nbu.presentation.town.TownCenterFragment;
+import com.example.nbu.service.data.SharedCharacterViewModel;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -41,6 +43,8 @@ public class SummaryFragment extends AbstractFragment<FragmentSummaryBinding, Su
         }
 
         binding.summaryRewardsText.setText(getString(R.string.summary_gold_and_exp_earned_text, goldReward, expReward));
+        SharedCharacterViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
+        sharedViewModel.updateCurrentBackground(R.drawable.camp_image);
         setupLevelUpUI();
         setupButtons();
     }

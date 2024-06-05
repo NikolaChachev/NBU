@@ -8,6 +8,7 @@ import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.nbu.R;
@@ -15,6 +16,7 @@ import com.example.nbu.databinding.ShopFragmentBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.presentation.inventory.Inventory;
 import com.example.nbu.presentation.town.TownCenterFragment;
+import com.example.nbu.service.data.SharedCharacterViewModel;
 import com.example.nbu.service.pojos.Item;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -43,6 +45,8 @@ public class ShopFragment extends AbstractFragment<ShopFragmentBinding, ShopView
         }
         setupRecyclerView();
         binding.shopNavigationButton.setOnClickListener(v -> navigateToView(TownCenterFragment.class, null));
+        SharedCharacterViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
+        sharedViewModel.updateCurrentBackground(R.drawable.smith_art);
     }
 
     private void setupRecyclerView() {

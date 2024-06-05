@@ -2,6 +2,10 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="black_medium_transparency">#8D000000</color>
+    <color name="grey_medium_transparency">#725C5B5B</color>
+    <color name="white_medium_transparency">#6DFDFDFD</color>
+    <color name="white_low_transparency">#D0FFFFFF</color>
     <color name="red">#FF0000</color>
     <color name="yellow">#FFEB3B</color>
     <color name="orange">#FF9800</color>

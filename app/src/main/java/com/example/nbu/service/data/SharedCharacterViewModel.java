@@ -19,6 +19,10 @@ public class SharedCharacterViewModel extends AbstractViewModel {
 
     public LiveData<Boolean> _gameStarted = gameStarted;
 
+    private final MutableLiveData<Integer> currentBackground = new MutableLiveData<>();
+
+    public LiveData<Integer> _currentBackground = currentBackground;
+
     private final Adventurer adventurer;
 
     @Inject
@@ -39,6 +43,10 @@ public class SharedCharacterViewModel extends AbstractViewModel {
     public void updateCurrentHealth() {
         double currentHealth = (adventurer.getCurrentHealth() / adventurer.getMaxHealth()) * 100;
         characterHealth.setValue(currentHealth);
+    }
+
+    public void updateCurrentBackground(int imageSource) {
+        currentBackground.setValue(imageSource);
     }
 
 

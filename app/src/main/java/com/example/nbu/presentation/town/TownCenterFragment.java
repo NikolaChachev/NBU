@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import com.example.nbu.BR;
 import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentTownCenterBinding;
@@ -12,6 +13,7 @@ import com.example.nbu.mvvm.vm.EmptyViewModel;
 import com.example.nbu.presentation.combat.encounter.EncounterFragment;
 import com.example.nbu.presentation.town.shop.ShopFragment;
 import com.example.nbu.presentation.town.tavern.TavernFragment;
+import com.example.nbu.service.data.SharedCharacterViewModel;
 
 public class TownCenterFragment extends AbstractFragment<FragmentTownCenterBinding, EmptyViewModel> {
 
@@ -38,6 +40,8 @@ public class TownCenterFragment extends AbstractFragment<FragmentTownCenterBindi
         binding.townCenterExitTownButton.setOnClickListener(v -> {
             navigateToView(EncounterFragment.class, null);
         });
+        SharedCharacterViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
+        sharedViewModel.updateCurrentBackground(R.drawable.town_art);
     }
 
     @Override

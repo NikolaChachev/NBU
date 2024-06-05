@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.PopupMenu;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.nbu.BR;
@@ -14,6 +15,7 @@ import com.example.nbu.databinding.FragmentInventoryBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.mvvm.vm.EmptyViewModel;
 import com.example.nbu.presentation.character.Adventurer;
+import com.example.nbu.service.data.SharedCharacterViewModel;
 import com.example.nbu.service.pojos.Item;
 import dagger.hilt.android.AndroidEntryPoint;
 
@@ -30,10 +32,12 @@ public class InventoryFragment extends AbstractFragment<FragmentInventoryBinding
         super.onViewCreated(view, savedInstanceState);
 
         inventory = Inventory.getInstance();
-        adapter = new InventoryAdapter(inventory.getItems(), this::handleItemClick);
+        adapter = new InventoryAdapter(inventory.getItems(), this::handleItemClick, requireContext());
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         binding.inventoryRecycleView.setAdapter(adapter);
         binding.inventoryRecycleView.setLayoutManager(layoutManager);
+        SharedCharacterViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
+        sharedViewModel.updateCurrentBackground(inventory.inventoryImage);
         setupEquipmentTexts();
         setupEquipmentClicks();
     }

@@ -131,6 +131,10 @@ public class CombatViewModel extends AbstractViewModel {
         return sb.toString();
     }
 
+    public int getEnemyImage() {
+        return enemy.getDrawableSource();
+    }
+
     public void refreshEnemy() {
         generateEnemy();
     }

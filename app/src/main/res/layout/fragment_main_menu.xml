@@ -6,6 +6,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+<!--        <ImageView-->
+<!--            android:layout_width="match_parent"-->
+<!--            android:layout_height="match_parent"-->
+<!--            android:src="@drawable/start_menu"-->
+<!--            android:scaleType="fitXY"-->
+<!--            />-->
+
         <TextView
             android:id="@+id/main_menu_quit_button"
             android:layout_width="wrap_content"
@@ -14,6 +21,7 @@
             android:layout_marginStart="24dp"
             android:text="@string/main_menu_quit_button_text"
             android:textSize="32sp"
+            android:textColor="@color/red"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
 
@@ -24,6 +32,7 @@
             android:layout_marginBottom="24dp"
             android:text="@string/main_menu_new_game_button_text"
             android:textSize="32sp"
+            android:textColor="@color/green"
             app:layout_constraintBottom_toTopOf="@id/main_menu_quit_button"
             app:layout_constraintStart_toStartOf="@id/main_menu_quit_button" />
 

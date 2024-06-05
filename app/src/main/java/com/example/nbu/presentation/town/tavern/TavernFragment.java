@@ -5,12 +5,14 @@ import android.view.View;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.databinding.library.baseAdapters.BR;
+import androidx.lifecycle.ViewModelProvider;
 import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentTavernBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.mvvm.vm.EmptyViewModel;
 import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.presentation.town.TownCenterFragment;
+import com.example.nbu.service.data.SharedCharacterViewModel;
 
 public class TavernFragment extends AbstractFragment<FragmentTavernBinding, EmptyViewModel> {
 
@@ -29,6 +31,8 @@ public class TavernFragment extends AbstractFragment<FragmentTavernBinding, Empt
         binding.tavernLeaveButton.setOnClickListener(v -> {
             navigateToView(TownCenterFragment.class, null);
         });
+        SharedCharacterViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
+        sharedViewModel.updateCurrentBackground(R.drawable.tavern_art);
     }
 
     @Override

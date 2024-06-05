@@ -12,7 +12,7 @@ public class Adventurer extends BaseCharacter {
     private int currentExperience;
     private int requiredExperienceForNextLevel;
 
-    private int expPointsToSpend = 10;
+    private int expPointsToSpend = 0;
 
     private static Adventurer instance;
 
@@ -23,7 +23,7 @@ public class Adventurer extends BaseCharacter {
     }
 
     public static Adventurer initializeAdventurer(String name) {
-        instance = new Adventurer(name, 1, 12000.d, 0, 50, 1, 10, 5);
+        instance = new Adventurer(name, 1, 100.d, 0, 50, 2, 2, 5);
         return instance;
     }
 
@@ -52,13 +52,16 @@ public class Adventurer extends BaseCharacter {
         if(expPointsToSpend < 1) return;
         switch (stat){
             case STRENGTH:
-                super.strength++;
+                super.strength+=2;
+                double currentMax = maxHealth;
+                maxHealth = strength * 50;
+                currentHealth = currentHealth + (maxHealth - currentMax);
                 break;
             case AGILITY:
-                super.agility++;
+                super.agility+=2;
                 break;
             case SPEED:
-                super.speed++;
+                super.speed+=2;
                 break;
         }
         expPointsToSpend--;
