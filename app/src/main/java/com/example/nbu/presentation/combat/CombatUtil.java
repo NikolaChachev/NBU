@@ -10,7 +10,7 @@ public class CombatUtil {
 
     public static final ArrayList<Enemy> enemies = new ArrayList<>() {
         {
-            add(new Enemy("ferral rabbit", 1, 20.d, 0, 100, 2, 5, 8));
+            add(new Enemy("ferral rabbit", 1, 20.d, 0, 100, 200, 5, 8));
             add(new Enemy("wolf", 2, 50.d, 0, 200, 15, 10, 10));
             add(new Enemy("bear", 2, 100.d, 15, 400, 7, 7, 5));
             add(new Enemy("wild boar", 2, 75.d, 5, 200, 5, 10, 8));
