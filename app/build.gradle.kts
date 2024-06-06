@@ -46,4 +46,7 @@ dependencies {
     //hilt
     implementation ("com.google.dagger:hilt-android:2.44")
     annotationProcessor ("com.google.dagger:hilt-compiler:2.44")
+
+    //Gson for Json
+    implementation("com.google.code.gson:gson:2.11.0")
 }

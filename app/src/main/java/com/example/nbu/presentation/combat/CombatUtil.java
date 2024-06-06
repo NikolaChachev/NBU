@@ -11,7 +11,7 @@ public class CombatUtil {
 
     public static final ArrayList<Enemy> enemies = new ArrayList<>() {
         {
-            add(new Enemy("Gazer", 1, 20.d, 0, 100, 2, 5, 8, R.drawable.beast_4));
+            add(new Enemy("Gazer", 1, 20.d, 0, 50, 2, 5, 5, R.drawable.beast_4));
             add(new Enemy("Displacer beast", 2, 50.d, 0, 200, 15, 10, 10, R.drawable.displacer_beast));
             add(new Enemy("Berbalang", 2, 100.d, 15, 400, 7, 7, 5, R.drawable.berbalang));
             add(new Enemy("Animated armor", 2, 75.d, 5, 200, 5, 10, 8, R.drawable.animated_armor));

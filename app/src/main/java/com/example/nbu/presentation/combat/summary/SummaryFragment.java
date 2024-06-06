@@ -9,11 +9,11 @@ import com.example.nbu.BR;
 import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentSummaryBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
-import com.example.nbu.presentation.character.Adventurer;
-import com.example.nbu.presentation.character.AdventurerStat;
 import com.example.nbu.presentation.combat.encounter.EncounterFragment;
 import com.example.nbu.presentation.town.TownCenterFragment;
 import com.example.nbu.service.data.SharedCharacterViewModel;
+import com.example.nbu.service.player.Adventurer;
+import com.example.nbu.service.player.AdventurerStat;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint
@@ -29,6 +29,8 @@ public class SummaryFragment extends AbstractFragment<FragmentSummaryBinding, Su
 
     private Adventurer adventurer;
 
+    private SharedCharacterViewModel sharedViewModel;
+
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
@@ -43,7 +45,7 @@ public class SummaryFragment extends AbstractFragment<FragmentSummaryBinding, Su
         }
 
         binding.summaryRewardsText.setText(getString(R.string.summary_gold_and_exp_earned_text, goldReward, expReward));
-        SharedCharacterViewModel sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
+        sharedViewModel = new ViewModelProvider(requireActivity()).get(SharedCharacterViewModel.class);
         sharedViewModel.updateCurrentBackground(R.drawable.camp_image);
         setupLevelUpUI();
         setupButtons();
@@ -66,6 +68,7 @@ public class SummaryFragment extends AbstractFragment<FragmentSummaryBinding, Su
         binding.summaryStrengthLayout.statIncreaseDescription.setText(R.string.summary_strength_increase_text);
         binding.summaryStrengthLayout.statIncreaseImage.setOnClickListener(v -> {
             adventurer.increaseStat(AdventurerStat.STRENGTH);
+            sharedViewModel.updateCurrentHealth();
             updatePointsText();
         });
         //speed

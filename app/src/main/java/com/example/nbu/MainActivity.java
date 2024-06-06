@@ -7,14 +7,19 @@ import androidx.lifecycle.ViewModelProvider;
 import com.example.nbu.databinding.ActivityMainBinding;
 import com.example.nbu.mvvm.activity.AbstractActivity;
 import com.example.nbu.mvvm.vm.EmptyViewModel;
-import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.presentation.inventory.InventoryFragment;
 import com.example.nbu.presentation.menu.MainMenuFragment;
 import com.example.nbu.service.data.SharedCharacterViewModel;
+import com.example.nbu.service.player.Adventurer;
+import com.example.nbu.service.prefs.NbuSharedPrefs;
 import dagger.hilt.android.AndroidEntryPoint;
+import javax.inject.Inject;
 
 @AndroidEntryPoint
 public class MainActivity extends AbstractActivity<ActivityMainBinding, EmptyViewModel> {
+
+    @Inject
+    NbuSharedPrefs sharedPrefs;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,12 @@ public class MainActivity extends AbstractActivity<ActivityMainBinding, EmptyVie
         sharedViewModel._currentBackground.observe(this, data -> binding.mainActivityImage.setImageDrawable(
                 ResourcesCompat.getDrawable(getResources(), data, null)));
         openView(MainMenuFragment.class, null);
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        sharedPrefs.saveGameProgress();
     }
 
     @Override

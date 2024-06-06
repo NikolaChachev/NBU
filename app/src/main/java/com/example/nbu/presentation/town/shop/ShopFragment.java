@@ -14,9 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.nbu.R;
 import com.example.nbu.databinding.ShopFragmentBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
-import com.example.nbu.presentation.inventory.Inventory;
 import com.example.nbu.presentation.town.TownCenterFragment;
 import com.example.nbu.service.data.SharedCharacterViewModel;
+import com.example.nbu.service.player.Inventory;
 import com.example.nbu.service.pojos.Item;
 import dagger.hilt.android.AndroidEntryPoint;
 

@@ -6,13 +6,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.example.nbu.R;
 import com.example.nbu.mvvm.AbstractViewModel;
-import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.presentation.character.BaseCharacter;
 import com.example.nbu.presentation.character.Enemy;
 import com.example.nbu.presentation.combat.CombatUtil;
 import com.example.nbu.presentation.combat.summary.SummaryFragment;
-import com.example.nbu.presentation.inventory.Inventory;
 import com.example.nbu.service.coroutines.ACoroutineContextProvider;
+import com.example.nbu.service.player.Adventurer;
+import com.example.nbu.service.player.Inventory;
 import com.example.nbu.service.pojos.Item;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import java.util.LinkedList;
@@ -137,6 +137,7 @@ public class CombatViewModel extends AbstractViewModel {
 
     public void refreshEnemy() {
         generateEnemy();
+        currentRound = 1;
     }
 
     public void attemptToFlee() {
