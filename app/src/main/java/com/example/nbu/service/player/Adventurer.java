@@ -1,8 +1,8 @@
-package com.example.nbu.presentation.character;
+package com.example.nbu.service.player;
 
 import com.example.nbu.R;
+import com.example.nbu.presentation.character.BaseCharacter;
 import com.example.nbu.presentation.combat.CombatUtil;
-import com.example.nbu.presentation.inventory.Inventory;
 import com.example.nbu.service.pojos.Armor;
 import com.example.nbu.service.pojos.Item;
 import com.example.nbu.service.pojos.Weapon;
@@ -23,8 +23,35 @@ public class Adventurer extends BaseCharacter {
     }
 
     public static Adventurer initializeAdventurer(String name) {
-        instance = new Adventurer(name, 1, 100.d, 0, 50, 2, 2, 5);
+        instance = new Adventurer(name, 1, 300.d, 0, 50, 2, 2, 5);
         return instance;
+    }
+    public static void restartAdventurerStats(){
+        instance.currentExperience = 0;
+        instance.requiredExperienceForNextLevel = 100;
+        instance.expPointsToSpend = 0;
+        instance.level = 1;
+        instance.strength = 2;
+        instance.maxHealth = instance.strength * 50;
+        instance.currentHealth = instance.maxHealth;
+        instance.armor = 0;
+        instance.speed = 50;
+        instance.agility = 2;
+        instance.baseDamage = 5;
+    }
+
+    public static void updateAdventurerInstance(Adventurer adventurer){
+        instance.currentExperience = adventurer.currentExperience;
+        instance.requiredExperienceForNextLevel = adventurer.requiredExperienceForNextLevel;
+        instance.expPointsToSpend = adventurer.expPointsToSpend;
+        instance.level = adventurer.level;
+        instance.strength = adventurer.strength;
+        instance.maxHealth = adventurer.maxHealth;
+        instance.currentHealth = adventurer.currentHealth;
+        instance.armor = adventurer.armor;
+        instance.speed = adventurer.speed;
+        instance.agility = adventurer.agility;
+        instance.baseDamage = adventurer.baseDamage;
     }
 
     public static Adventurer getInstance() {
@@ -128,4 +155,6 @@ public class Adventurer extends BaseCharacter {
     public void hitTarget(BaseCharacter target) {
 
     }
+
+
 }

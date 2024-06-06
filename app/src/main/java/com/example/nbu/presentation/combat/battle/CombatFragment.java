@@ -12,8 +12,13 @@ import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentCombatBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.presentation.combat.summary.SummaryFragment;
+import com.example.nbu.presentation.menu.MainMenuFragment;
 import com.example.nbu.service.data.SharedCharacterViewModel;
+import com.example.nbu.service.player.Adventurer;
+import com.example.nbu.service.player.Inventory;
+import com.example.nbu.service.prefs.NbuSharedPrefs;
 import dagger.hilt.android.AndroidEntryPoint;
+import javax.inject.Inject;
 
 @AndroidEntryPoint
 public class CombatFragment extends AbstractFragment<FragmentCombatBinding, CombatViewModel> {
@@ -21,6 +26,9 @@ public class CombatFragment extends AbstractFragment<FragmentCombatBinding, Comb
     private CombatAdapter combatAdapter;
 
     private SharedCharacterViewModel sharedViewModel;
+
+    @Inject
+    NbuSharedPrefs sharedPrefs;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
@@ -74,13 +82,15 @@ public class CombatFragment extends AbstractFragment<FragmentCombatBinding, Comb
                     updateButtonsFunctionality(
                             R.string.combat_right_button_victory,
                             R.string.combat_left_button_progress,
-                            (v) -> {},
                             (v) -> {
-                        navigateToView(SummaryFragment.class, new Bundle());
-                    });
+                            },
+                            (v) -> {
+                                navigateToView(SummaryFragment.class, new Bundle());
+                            });
                     break;
                 case DEFEAT:
                     binding.combatRightButton.setText(R.string.combat_right_button_victory);
+                    sharedPrefs.clearSaveFile();
                     updateButtonsFunctionality(
                             R.string.combat_right_button_defeat,
                             R.string.combat_left_button_defeat,
@@ -89,7 +99,10 @@ public class CombatFragment extends AbstractFragment<FragmentCombatBinding, Comb
                                 System.exit(0);
                             },
                             (v) -> {
-                                //todo right button Restart functionality, this will be implemented at the end, when we have a main menu
+                                Adventurer.restartAdventurerStats();
+                                Inventory.getInstance().clearInventory();
+                                sharedViewModel.updateCurrentHealth();
+                                navigateToView(MainMenuFragment.class, null);
                             });
                     //todo
                     break;

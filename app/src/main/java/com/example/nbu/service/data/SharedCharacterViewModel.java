@@ -3,8 +3,8 @@ package com.example.nbu.service.data;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.example.nbu.mvvm.AbstractViewModel;
-import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.service.coroutines.ACoroutineContextProvider;
+import com.example.nbu.service.player.Adventurer;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import javax.inject.Inject;
 

@@ -1,9 +1,7 @@
-package com.example.nbu.presentation.inventory;
+package com.example.nbu.service.player;
 
 import com.example.nbu.R;
-import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.service.pojos.Armor;
-import com.example.nbu.service.pojos.ArmorTypes;
 import com.example.nbu.service.pojos.Item;
 import com.example.nbu.service.pojos.Weapon;
 import java.util.ArrayList;
@@ -32,11 +30,6 @@ public class Inventory {
     //region initialization
     private Inventory() {
         items = new ArrayList<>();
-        //todo thi is for testing, remove later on.
-        Weapon weapon1 = new Weapon("Sword", 100, 2, 4, 1);
-        Armor armor = new Armor("golden feet", 1000, 30, 40, 1, ArmorTypes.FEET);
-        items.add(weapon1);
-        items.add(armor);
     }
 
     private static final Inventory instance = new Inventory();
@@ -47,6 +40,30 @@ public class Inventory {
             throw new IllegalStateException("Inventory is fill");
         }
         items.add(item);
+    }
+
+    public void clearInventory() {
+        items.clear();
+        headPiece = null;
+        armsPiece = null;
+        chestPiece = null;
+        legsPiece = null;
+        feetPiece = null;
+        weapon = null;
+        gold = 0;
+    }
+
+    public static void loadInventory(Inventory inventory) {
+        instance.clearInventory();
+        instance.items.addAll(inventory.items);
+        instance.headPiece = inventory.headPiece;
+        instance.armsPiece = inventory.armsPiece;
+        instance.chestPiece = inventory.chestPiece;
+        instance.legsPiece = inventory.legsPiece;
+        instance.feetPiece = inventory.feetPiece;
+        instance.weapon = inventory.weapon;
+        instance.gold = inventory.gold;
+
     }
 
     public void addGold(int gold) {

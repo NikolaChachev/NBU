@@ -36,6 +36,19 @@
             app:layout_constraintBottom_toTopOf="@id/main_menu_quit_button"
             app:layout_constraintStart_toStartOf="@id/main_menu_quit_button" />
 
+        <TextView
+            android:id="@+id/main_menu_continue_game_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/main_menu_continue_text"
+            android:textColor="@color/green"
+            android:enabled="false"
+            android:layout_marginBottom="24dp"
+            android:textSize="32sp"
+            app:layout_constraintBottom_toTopOf="@id/main_menu_new_game_button"
+            app:layout_constraintStart_toStartOf="@id/main_menu_new_game_button"
+            />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

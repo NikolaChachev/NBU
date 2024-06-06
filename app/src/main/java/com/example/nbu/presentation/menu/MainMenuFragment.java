@@ -12,10 +12,15 @@ import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.mvvm.vm.EmptyViewModel;
 import com.example.nbu.presentation.combat.encounter.EncounterFragment;
 import com.example.nbu.service.data.SharedCharacterViewModel;
+import com.example.nbu.service.prefs.NbuSharedPrefs;
 import dagger.hilt.android.AndroidEntryPoint;
+import javax.inject.Inject;
 
 @AndroidEntryPoint
 public class MainMenuFragment extends AbstractFragment<FragmentMainMenuBinding, EmptyViewModel> {
+
+    @Inject
+    NbuSharedPrefs sharedPrefs;
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable final Bundle savedInstanceState) {
@@ -32,6 +37,18 @@ public class MainMenuFragment extends AbstractFragment<FragmentMainMenuBinding, 
             sharedViewModel.notifyGameStarted();
             navigateToView(EncounterFragment.class, null);
         });
+        if (sharedPrefs.containsSavedGame()) {
+            binding.mainMenuContinueGameButton.setEnabled(true);
+            binding.mainMenuContinueGameButton.setTextColor(requireContext().getColor(R.color.yellow));
+            binding.mainMenuContinueGameButton.setOnClickListener(v -> {
+                sharedPrefs.loadGameProgress();
+                sharedViewModel.notifyGameStarted();
+                navigateToView(EncounterFragment.class, null);
+            });
+        } else {
+            binding.mainMenuContinueGameButton.setEnabled(false);
+            binding.mainMenuContinueGameButton.setTextColor(requireContext().getColor(R.color.grey_medium_transparency));
+        }
     }
 
     @Override

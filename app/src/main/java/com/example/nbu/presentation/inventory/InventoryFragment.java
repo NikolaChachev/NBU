@@ -14,8 +14,9 @@ import com.example.nbu.R;
 import com.example.nbu.databinding.FragmentInventoryBinding;
 import com.example.nbu.mvvm.fragment.AbstractFragment;
 import com.example.nbu.mvvm.vm.EmptyViewModel;
-import com.example.nbu.presentation.character.Adventurer;
 import com.example.nbu.service.data.SharedCharacterViewModel;
+import com.example.nbu.service.player.Adventurer;
+import com.example.nbu.service.player.Inventory;
 import com.example.nbu.service.pojos.Item;
 import dagger.hilt.android.AndroidEntryPoint;
 
