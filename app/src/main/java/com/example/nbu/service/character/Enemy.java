@@ -1,4 +1,4 @@
-package com.example.nbu.presentation.character;
+package com.example.nbu.service.character;
 
 import com.example.nbu.R;
 import com.example.nbu.service.pojos.Item;
@@ -9,8 +9,8 @@ public class Enemy extends BaseCharacter implements ILootable {
 
     private int drawableSource;
 
-    public Enemy(String name, int level, Double maxHealth, int armor, int speed, int strength, int agility, double baseDamage, int imageSource) {
-        super(name, level, maxHealth, armor, speed, strength, agility, baseDamage);
+    public Enemy(String name, int level, int armor, int speed, int strength, int agility, double baseDamage, int imageSource) {
+        super(name, level, armor, speed, strength, agility, baseDamage);
         this.drawableSource = imageSource;
     }
 
@@ -49,8 +49,8 @@ public class Enemy extends BaseCharacter implements ILootable {
     }
 
     @Override
-    public List<Item> getLoot() {
-        return generateLootBasedOnEnemy(getName(), getLevel());
+    public String getLoot() {
+        return level * 10  + " gold\n" + level * 50 + " experience";
     }
 
     public static List<Item> generateLootBasedOnEnemy(String name, int level){

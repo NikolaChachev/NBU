@@ -133,6 +133,8 @@ public class InventoryFragment extends AbstractFragment<FragmentInventoryBinding
         binding.inventoryEquipment.equipmentLegs.setText(getString(R.string.layout_equipment_legs_text, text));
         text = inventory.getWeapon() != null ? inventory.getWeapon().getName() : "Empty";
         binding.inventoryEquipment.equipmentWeapon.setText(getString(R.string.layout_equipment_weapon_text, text));
+        text = String.valueOf(inventory.getGold());
+        binding.inventoryCurrentGold.setText(getString(R.string.layout_stats_current_gold_text, text));
 
         Adventurer adventurer = Adventurer.getInstance();
         text = String.valueOf(adventurer.getStrength());
@@ -148,6 +150,10 @@ public class InventoryFragment extends AbstractFragment<FragmentInventoryBinding
         binding.inventoryStats.statsArmor.setText(getString(R.string.layout_stats_armor_text, text));
         text = String.valueOf(adventurer.getDamage());
         binding.inventoryStats.statsDamage.setText(getString(R.string.layout_stats_damage_text, text));
+        text = String.valueOf(adventurer.getCurrentExperience());
+        binding.inventoryStats.currentExp.setText(getString(R.string.layout_stats_current_exp_text, text));
+        text = String.valueOf(adventurer.getRequiredExperienceForNextLevel());
+        binding.inventoryStats.neededExp.setText(getString(R.string.layout_stats_needed_exp_text, text));
     }
 
     @Override

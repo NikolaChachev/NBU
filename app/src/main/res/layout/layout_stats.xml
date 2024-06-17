@@ -83,5 +83,27 @@
             app:layout_constraintTop_toBottomOf="@id/stats_speed"
             tools:text="Damage: 100" />
 
+        <TextView
+            android:id="@+id/current_exp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:textColor="@color/yellow"
+            app:layout_constraintEnd_toStartOf="@id/needed_exp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/stats_damage"
+            tools:text="exp: 100" />
+
+        <TextView
+            android:id="@+id/needed_exp"
+            android:layout_width="0dp"
+            android:layout_height="30dp"
+            android:gravity="center"
+            android:textColor="@color/yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/current_exp"
+            app:layout_constraintTop_toBottomOf="@id/stats_damage"
+            tools:text="exp for level up: 1000"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

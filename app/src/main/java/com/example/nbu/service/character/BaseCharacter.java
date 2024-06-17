@@ -1,4 +1,4 @@
-package com.example.nbu.presentation.character;
+package com.example.nbu.service.character;
 
 import androidx.annotation.NonNull;
 
@@ -14,14 +14,14 @@ public abstract class BaseCharacter {
     protected int agility;
     protected double baseDamage;
 
-    public BaseCharacter(String name, int level, double maxHealth, int armor, int speed, int strength, int agility, double baseDamage) {
-        if (name == null || name.isEmpty() || level < 1 || maxHealth < 1 || armor < 0 || strength < 0 || agility < 0
+    public BaseCharacter(String name, int level, int armor, int speed, int strength, int agility, double baseDamage) {
+        if (name == null || name.isEmpty() || level < 1 || armor < 0 || strength < 0 || agility < 0
                 || baseDamage < 0 || speed < 0) {
             throw new IllegalArgumentException("bad data parsed to constructor");
         }
         this.name = name;
         this.level = level;
-        this.maxHealth = maxHealth;
+        this.maxHealth = strength > 0 ? strength * 50 : 20;
         this.currentHealth = maxHealth;
         this.armor = armor;
         this.speed = speed;
