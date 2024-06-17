@@ -6,14 +6,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import com.example.nbu.R;
 import com.example.nbu.mvvm.AbstractViewModel;
-import com.example.nbu.presentation.character.BaseCharacter;
-import com.example.nbu.presentation.character.Enemy;
 import com.example.nbu.presentation.combat.CombatUtil;
 import com.example.nbu.presentation.combat.summary.SummaryFragment;
+import com.example.nbu.service.character.BaseCharacter;
+import com.example.nbu.service.character.Enemy;
 import com.example.nbu.service.coroutines.ACoroutineContextProvider;
 import com.example.nbu.service.player.Adventurer;
 import com.example.nbu.service.player.Inventory;
-import com.example.nbu.service.pojos.Item;
 import dagger.hilt.android.lifecycle.HiltViewModel;
 import java.util.LinkedList;
 import java.util.List;
@@ -125,9 +124,7 @@ public class CombatViewModel extends AbstractViewModel {
         StringBuilder sb = new StringBuilder();
         sb.append(enemy.toString());
         sb.append("\n\nPossible loot:\n");
-        for (Item item : enemy.getLoot()) {
-            sb.append(item.getName()).append(", worth ").append(item.buyPrice()).append("g\n");
-        }
+        sb.append(enemy.getLoot());
         return sb.toString();
     }
 

@@ -38,6 +38,17 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/inventory_equipment" />
 
+        <TextView
+            android:id="@+id/inventory_current_gold"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textColor="@color/yellow"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/inventory_subtitle"
+            />
+
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/inventory_recycle_view"
             android:layout_width="match_parent"
@@ -45,7 +56,7 @@
             android:layout_marginTop="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/inventory_subtitle" />
+            app:layout_constraintTop_toBottomOf="@id/inventory_current_gold" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
